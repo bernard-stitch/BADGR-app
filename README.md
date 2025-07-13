@@ -40,8 +40,8 @@ BADGR allows small merchants to visually add payment method logos and promotiona
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/bernard-stitch/BADGR.git
-   cd BADGR
+   git clone https://github.com/bernard-stitch/BADGR-app.git
+   cd BADGR-app
    ```
 
 2. **Install dependencies**
@@ -72,11 +72,14 @@ npm run dev:frontend   # Frontend admin interface
 
 ## 📊 Project Status
 
-- ✅ **Repository Setup**: Complete
-- ✅ **Supabase Integration**: Complete
-- ⏳ **Backend Development**: In Progress
-- ⏳ **Frontend Development**: Pending
-- ⏳ **Theme Extension**: Pending
+- ✅ **Repository Setup**: Complete ([GitHub](https://github.com/bernard-stitch/BADGR-app))
+- ✅ **Supabase Integration**: Complete (Project ID: rprltzscbxsqhigemejr)
+- ✅ **Backend Development**: Complete (Node.js API with Express)
+- ✅ **Frontend Development**: Complete (React + Polaris admin interface)
+- ✅ **Theme Extension Structure**: Complete (Shopify Theme App Extension)
+- ⏳ **Widget Rendering Logic**: In Progress (Task 11/18)
+- ⏳ **Testing Framework**: Pending
+- ⏳ **Production Deployment**: Pending
 
 ## 🗂️ Project Structure
 
