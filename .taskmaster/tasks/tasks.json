@@ -1,0 +1,686 @@
+{
+  "master": {
+    "tasks": [
+      {
+        "id": 1,
+        "title": "Setup Project Repository",
+        "description": "Clone the existing Git repository for the BADGR project and set up the initial directory structure.",
+        "status": "done",
+        "dependencies": [],
+        "priority": "medium",
+        "details": "Clone the repository from GitHub at https://github.com/bernard-stitch/BADGR.git. Set up the initial directory structure for the frontend and backend components. Include a README.md file with project overview and setup instructions.",
+        "testStrategy": "Verify repository cloning and initial structure by checking the presence of key files and directories.",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Clone the GitHub repository",
+            "description": "Clone the repository from https://github.com/bernard-stitch/BADGR.git.",
+            "status": "done",
+            "dependencies": [],
+            "details": "",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Set up initial directory structure",
+            "description": "Create the necessary directories for frontend and backend components.",
+            "status": "done",
+            "dependencies": [],
+            "details": "",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Create README.md file",
+            "description": "Include project overview and setup instructions in the README.md file.",
+            "status": "completed",
+            "dependencies": [],
+            "details": "",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Configure Node.js Backend",
+        "description": "Set up the Node.js server for the BADGR application.",
+        "details": "Initialize a Node.js application using npm. Install necessary packages like Express for server handling and Supabase client for database interactions. Create a basic server file to listen on a specified port.",
+        "testStrategy": "Run the server and ensure it starts without errors. Test the server endpoint with a simple GET request.",
+        "priority": "high",
+        "dependencies": [
+          1
+        ],
+        "status": "done",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Initialize Node.js Application",
+            "description": "Set up a new Node.js application using npm.",
+            "dependencies": [],
+            "details": "Run 'npm init -y' in the src/backend/ directory to create a package.json file.",
+            "status": "done",
+            "testStrategy": "Verify the package.json file is created with default values."
+          },
+          {
+            "id": 2,
+            "title": "Install Required Packages",
+            "description": "Install Express and Supabase client packages.",
+            "dependencies": [
+              1
+            ],
+            "details": "Run 'npm install express @supabase/supabase-js' in the src/backend/ directory to install necessary packages.",
+            "status": "done",
+            "testStrategy": "Check node_modules directory for installed packages."
+          },
+          {
+            "id": 3,
+            "title": "Create Basic Server File",
+            "description": "Create a server file to handle requests.",
+            "dependencies": [
+              2
+            ],
+            "details": "Create a file named server.js in the src/backend/ directory and set up a basic Express server.",
+            "status": "done",
+            "testStrategy": "Run the server and access it via localhost to ensure it responds."
+          },
+          {
+            "id": 4,
+            "title": "Configure Supabase Client",
+            "description": "Set up the Supabase client for database interactions.",
+            "dependencies": [
+              3
+            ],
+            "details": "In server.js, import the Supabase client and initialize it with the project URL and API key.",
+            "status": "done",
+            "testStrategy": "Test the connection to Supabase by making a simple query."
+          },
+          {
+            "id": 5,
+            "title": "Set Up Server Listening Port",
+            "description": "Configure the server to listen on a specified port.",
+            "dependencies": [
+              4
+            ],
+            "details": "In server.js, use app.listen() to set the server to listen on a defined port, e.g., 3000.",
+            "status": "done",
+            "testStrategy": "Ensure the server starts without errors and is accessible on the specified port."
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Integrate Supabase for Configuration Storage",
+        "description": "Connect the Node.js backend to Supabase for storing merchant configurations using MCP tools. Utilize the actual Supabase project details for configuration.",
+        "status": "done",
+        "dependencies": [
+          2
+        ],
+        "priority": "high",
+        "details": "Utilize Supabase MCP tools for project creation and database setup. The BADGR project has been created with the following details: Project ID: rprltzscbxsqhigemejr, URL: https://rprltzscbxsqhigemejr.supabase.co, Anon Key: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJwcmx0enNjYnhzcWhpZ2VtZWpyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIzMjI3NDAsImV4cCI6MjA2Nzg5ODc0MH0.FlPwvn4fCU_f8HAJH3_L3c3nsrxKX793pzJ9pvquccQ, Region: us-east-1, Status: ACTIVE_HEALTHY. Use mcp_supabase_apply_migration for database schema setup, and mcp_supabase_generate_typescript_types for TypeScript integration. Perform database operations using mcp_supabase_execute_sql.",
+        "testStrategy": "Create a test merchant configuration and verify it can be stored and retrieved from the Supabase database using the MCP tools.",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create BADGR project using MCP tools",
+            "description": "Use mcp_supabase_create_project to create the BADGR project.",
+            "status": "done",
+            "dependencies": [],
+            "details": "",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Retrieve connection details",
+            "description": "Use mcp_supabase_get_project_url and mcp_supabase_get_anon_key to get connection details.",
+            "status": "completed",
+            "dependencies": [],
+            "details": "Project ID: rprltzscbxsqhigemejr, URL: https://rprltzscbxsqhigemejr.supabase.co, Anon Key: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJwcmx0enNjYnhzcWhpZ2VtZWpyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIzMjI3NDAsImV4cCI6MjA2Nzg5ODc0MH0.FlPwvn4fCU_f8HAJH3_L3c3nsrxKX793pzJ9pvquccQ, Region: us-east-1, Status: ACTIVE_HEALTHY.",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Set up database schema",
+            "description": "Use mcp_supabase_apply_migration for database schema setup.",
+            "status": "done",
+            "dependencies": [],
+            "details": "",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Generate TypeScript types",
+            "description": "Use mcp_supabase_generate_typescript_types for TypeScript integration.",
+            "status": "done",
+            "dependencies": [],
+            "details": "",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Perform database operations",
+            "description": "Use mcp_supabase_execute_sql for database operations.",
+            "status": "done",
+            "dependencies": [],
+            "details": "",
+            "testStrategy": ""
+          },
+          {
+            "id": 6,
+            "title": "Set up environment variables",
+            "description": "Configure environment variables with the actual Supabase project details.",
+            "status": "done",
+            "dependencies": [],
+            "details": "Set the following environment variables: SUPABASE_URL=https://rprltzscbxsqhigemejr.supabase.co, SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJwcmx0enNjYnhzcWhpZ2VtZWpyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIzMjI3NDAsImV4cCI6MjA2Nzg5ODc0MH0.FlPwvn4fCU_f8HAJH3_L3c3nsrxKX793pzJ9pvquccQ.",
+            "testStrategy": "Verify that the environment variables are correctly set and accessible in the application."
+          },
+          {
+            "id": 7,
+            "title": "Create widget configuration table schema",
+            "description": "Define the schema for the widget configuration table in the Supabase database.",
+            "status": "done",
+            "dependencies": [],
+            "details": "Ensure the schema includes necessary fields for widget configurations.",
+            "testStrategy": "Create a sample widget configuration and verify it can be stored in the database."
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Implement Widget Configuration API",
+        "description": "Create RESTful API endpoints for managing widget configurations.",
+        "details": "Develop API endpoints for creating, retrieving, updating, and deleting widget configurations. Use Express to define routes and handle requests.",
+        "testStrategy": "Write unit tests for each API endpoint using Jest to ensure they respond correctly to various inputs.",
+        "priority": "high",
+        "dependencies": [
+          3
+        ],
+        "status": "done",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Set Up Express Server",
+            "description": "Initialize an Express server to handle API requests.",
+            "dependencies": [],
+            "details": "Create a new Express application and configure middleware for JSON parsing and error handling.",
+            "status": "done",
+            "testStrategy": "Verify server starts without errors and responds to a basic GET request."
+          },
+          {
+            "id": 2,
+            "title": "Create CRUD Endpoints",
+            "description": "Develop RESTful API endpoints for creating, retrieving, updating, and deleting widget configurations.",
+            "dependencies": [
+              1
+            ],
+            "details": "Define routes for POST, GET, PUT, and DELETE methods in the Express application.",
+            "status": "done",
+            "testStrategy": "Use Postman to test each endpoint for expected responses and status codes."
+          },
+          {
+            "id": 3,
+            "title": "Implement Validation and Error Handling",
+            "description": "Add input validation and error handling for the API endpoints.",
+            "dependencies": [
+              2
+            ],
+            "details": "Use middleware to validate request data and handle errors gracefully, returning appropriate HTTP status codes.",
+            "status": "done",
+            "testStrategy": "Test endpoints with invalid data to ensure proper error responses are returned."
+          },
+          {
+            "id": 4,
+            "title": "Integrate Supabase for Data Management",
+            "description": "Connect the API to Supabase for managing widget configuration data.",
+            "dependencies": [
+              3
+            ],
+            "details": "Use the existing Supabase client to perform database operations in the CRUD endpoints.",
+            "status": "done",
+            "testStrategy": "Verify that data is correctly stored, retrieved, updated, and deleted in Supabase."
+          },
+          {
+            "id": 5,
+            "title": "Document API Endpoints",
+            "description": "Create documentation for the API endpoints and usage examples.",
+            "dependencies": [
+              4
+            ],
+            "details": "Use tools like Swagger or Postman to document the API, including request/response formats and examples.",
+            "status": "done",
+            "testStrategy": "Ensure documentation is clear and accurately reflects the API functionality."
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Setup Frontend with React and Polaris",
+        "description": "Initialize the frontend application using React and Polaris UI components.",
+        "details": "Create a new React application using Create React App. Install Polaris and App Bridge libraries. Set up the main application structure and include Polaris components for styling.",
+        "testStrategy": "Run the React application and verify that Polaris components render correctly on the page.",
+        "priority": "high",
+        "dependencies": [
+          1
+        ],
+        "status": "done",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create React Application",
+            "description": "Initialize a new React application using Create React App.",
+            "dependencies": [],
+            "details": "Run the command 'npx create-react-app frontend' in the src directory to set up the initial React application.\n<info added on 2025-07-12T13:45:35.857Z>\nThe React application is already set up with a Vite configuration, and the package.json indicates that React 18.2.0 and React-DOM are installed, utilizing the Vite build system.\n</info added on 2025-07-12T13:45:35.857Z>",
+            "status": "done",
+            "testStrategy": "Verify that the application starts without errors and displays the default welcome page."
+          },
+          {
+            "id": 2,
+            "title": "Install Polaris and App Bridge",
+            "description": "Install the Polaris and App Bridge libraries for UI components and Shopify integration.",
+            "dependencies": [
+              1
+            ],
+            "details": "Run 'npm install @shopify/polaris @shopify/app-bridge-react' to add the necessary libraries to the project.\n<info added on 2025-07-12T13:46:05.658Z>\nSuccessfully installed @shopify/app-bridge-react version 4.2.0. Both Polaris and App Bridge are now available in the project dependencies.\n</info added on 2025-07-12T13:46:05.658Z>",
+            "status": "done",
+            "testStrategy": "Check package.json to confirm that Polaris and App Bridge are listed as dependencies."
+          },
+          {
+            "id": 3,
+            "title": "Set Up Application Structure",
+            "description": "Organize the main application structure for the React app.",
+            "dependencies": [
+              1
+            ],
+            "details": "Create necessary folders and files within the src/frontend directory, including components, pages, and styles.\n<info added on 2025-07-12T13:49:05.307Z>\nSuccessfully created complete React application structure, including the main entry point (src/index.js), App.js with Polaris and App Bridge integration, pages/Dashboard.js with Polaris components, pages/WidgetSettings.js with form controls, styles/index.css with Polaris imports, styles/App.css with custom styles, vite.config.js for build configuration, updated index.html to match React structure, and folder structure: components, pages, styles, utils, hooks.\n</info added on 2025-07-12T13:49:05.307Z>",
+            "status": "done",
+            "testStrategy": "Ensure that the folder structure is correctly created and all files are in their respective locations."
+          },
+          {
+            "id": 4,
+            "title": "Integrate Polaris Components",
+            "description": "Include Polaris components in the main application file for styling.",
+            "dependencies": [
+              2,
+              3
+            ],
+            "details": "Import and use Polaris components in the App.js file to create a basic layout.\n<info added on 2025-07-12T13:49:20.013Z>\nPolaris components have been successfully integrated throughout the application: AppProvider wraps the entire application with Polaris context. The Dashboard page uses Page, Layout, Card, Text, Button, Badge, and DataTable components. The WidgetSettings page uses Page, Layout, Card, Text, Button, TextField, Select, Checkbox, FormLayout, Banner, and Toast components, along with Frame. Polaris styles have been imported in index.css, and custom styling has been added in App.css for enhanced appearance. All components adhere to Polaris design patterns and conventions.\n</info added on 2025-07-12T13:49:20.013Z>",
+            "status": "done",
+            "testStrategy": "Run the application and verify that Polaris components render correctly on the page."
+          },
+          {
+            "id": 5,
+            "title": "Implement App Bridge for Shopify",
+            "description": "Set up App Bridge to enable Shopify integration in the application.",
+            "dependencies": [
+              2,
+              4
+            ],
+            "details": "Configure App Bridge in the main application file and ensure it connects with the Shopify store.\n<info added on 2025-07-12T13:49:33.323Z>\nApp Bridge for Shopify has been successfully implemented: App Bridge Provider wraps the entire application in App.js, configuration includes apiKey from environment variables, host detection from URL parameters or window.location.origin, ForceRedirect enabled for proper Shopify integration, the Provider is properly nested within the AppProvider from Polaris, setup allows communication with Shopify API, and is ready for deployment within Shopify admin interface.\n</info added on 2025-07-12T13:49:33.323Z>",
+            "status": "done",
+            "testStrategy": "Test the integration by checking if the app can communicate with the Shopify API."
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Develop Admin UI for Widget Management",
+        "description": "Create the admin interface for merchants to manage widget settings.",
+        "details": "Build components for selecting logos, toggling BNPL options, and choosing placement on the product page. Use state management to handle user inputs and display current configurations.",
+        "testStrategy": "Perform manual testing to ensure all UI components function as expected and reflect the correct state.",
+        "priority": "high",
+        "dependencies": [
+          5
+        ],
+        "status": "done",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Design Logo Selection Component",
+            "description": "Create a component that allows merchants to upload and select logos for the widget.",
+            "dependencies": [],
+            "details": "The component should support image uploads and display a preview of the selected logo.\n<info added on 2025-07-12T13:53:18.014Z>\nSuccessfully created LogoSelector component with the following features: file drag-and-drop upload using Polaris DropZone component, image preview with Thumbnail component, file validation (type and size checking), support for JPG, PNG, GIF, and SVG formats, 5MB file size limit, error handling with Banner component, current logo display and removal functionality, recommended size guidance (200x60px), clean, accessible UI following Polaris design patterns, and proper state management with onChange callback.\n</info added on 2025-07-12T13:53:18.014Z>",
+            "status": "done",
+            "testStrategy": "Verify that the logo uploads correctly and the preview displays as expected."
+          },
+          {
+            "id": 2,
+            "title": "Implement BNPL Options Toggle",
+            "description": "Develop a toggle switch for merchants to enable or disable BNPL options.",
+            "dependencies": [],
+            "details": "The toggle should reflect the current state and update the widget settings accordingly.\n<info added on 2025-07-12T13:54:21.349Z>\nSuccessfully created BNPLOptionsToggle component with comprehensive features: Main toggle to enable/disable BNPL options entirely, support for 5 major BNPL providers: Affirm, Klarna, Afterpay, Sezzle, and Zip, individual provider toggles with descriptions and colored badges, provider count badge showing enabled providers, warning banner when no providers are selected, advanced settings section with collapsible interface, options for showing provider logos, payment breakdown, and all products, responsive grid layout for provider selection, tooltip with helpful information about BNPL benefits, complete state management with onChange callback, proper error handling and validation, clean, accessible UI following Polaris design patterns.\n</info added on 2025-07-12T13:54:21.349Z>",
+            "status": "done",
+            "testStrategy": "Check that the toggle state changes correctly and updates the settings in real-time."
+          },
+          {
+            "id": 3,
+            "title": "Create Product Page Placement Selector",
+            "description": "Build a dropdown or radio button group for selecting the placement of the widget on the product page.",
+            "dependencies": [],
+            "details": "Options should include various placements like top, bottom, or sidebar of the product page.\n<info added on 2025-07-12T13:55:48.116Z>\nSuccessfully created PlacementSelector component with advanced features: 6 placement options (Product Page Top/Bottom, Near Add to Cart, Product Tabs, Sidebar, Floating Widget), each with detailed descriptions, impact assessments, and recommended badges; a visual preview system with modal dialog for layout mockups; interactive radio button selection with visual feedback; color-coded badges indicating placement characteristics (Recommended, Popular, High Converting, etc.); live preview functionality with \"Select this placement\" option; responsive grid layout for placement options; comprehensive tooltips and help text; visual mockups showing widget placements; proper state management with onChange callback; clean, accessible UI following Polaris design patterns; and a modal-based preview system for enhanced user experience.\n</info added on 2025-07-12T13:55:48.116Z>",
+            "status": "done",
+            "testStrategy": "Ensure that the selected placement updates the configuration and is visually represented in the preview."
+          },
+          {
+            "id": 4,
+            "title": "Integrate State Management",
+            "description": "Implement state management to handle user inputs and maintain current configurations.",
+            "dependencies": [
+              1,
+              2,
+              3
+            ],
+            "details": "Use a state management library to manage the state of logo selection, BNPL options, and placement.\n<info added on 2025-07-12T13:57:08.912Z>\nSuccessfully integrated comprehensive state management throughout the admin interface, including updates to the WidgetSettings page to utilize new components (LogoSelector, BNPLOptionsToggle, PlacementSelector), centralized state management with a widgetConfig object for configuration data, loading states and error handling, unsaved changes tracking with user feedback, a comprehensive API integration structure for saving configurations, backend configuration loading with error handling, state change tracking and validation, configuration summary with visual status badges, form data preparation for file uploads, reset functionality for unsaved changes, state synchronization between components, error handling with toast notifications, disabled state management for dependent components when the widget is disabled, real-time configuration summary showing enabled features count, and proper form validation and user guidance throughout the interface.\n</info added on 2025-07-12T13:57:08.912Z>",
+            "status": "done",
+            "testStrategy": "Test that changes in any component reflect in the overall state and are preserved across interactions."
+          },
+          {
+            "id": 5,
+            "title": "Ensure Compliance with Shopify Polaris",
+            "description": "Review and adjust the UI components to ensure they follow Shopify Polaris design guidelines.",
+            "dependencies": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "details": "Focus on consistency in design, accessibility, and user experience as per Shopify standards.\n<info added on 2025-07-12T14:00:09.201Z>\nSuccessfully ensured full Shopify Polaris compliance across all components: Conducted comprehensive research on Polaris accessibility, form components, file uploads, and UI best practices. Created comprehensive accessibility utility functions (src/utils/accessibility.js) including ARIA attributes helpers for proper screen reader support, keyboard navigation utilities for custom interactive elements, focus management for modals and dialogs, form validation utilities with proper error handling, color contrast validation for WCAG compliance, and screen reader announcements for dynamic content. Enhanced CSS with accessibility improvements (src/styles/index.css) including screen reader only (.sr-only) utility class, high contrast mode support, reduced motion preferences support, touch device optimizations with proper target sizes, enhanced focus indicators for keyboard navigation, and skip links for accessibility. Verified all components follow Polaris patterns with proper use of Polaris components and design tokens, consistent spacing, typography, and color usage, responsive design with mobile-first approach, proper form labeling and validation patterns, and error handling with appropriate status indicators. Application successfully running with all accessibility enhancements. All components tested for keyboard navigation and screen reader compatibility.\n</info added on 2025-07-12T14:00:09.201Z>",
+            "status": "done",
+            "testStrategy": "Conduct a design review and user testing to confirm adherence to Polaris guidelines."
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "title": "Implement Logo Selection Feature",
+        "description": "Allow merchants to select logos from a predefined library. Implementation is complete with a fully functional logo selection component.",
+        "status": "done",
+        "dependencies": [
+          6
+        ],
+        "priority": "medium",
+        "details": "Created a PredefinedLogoSelector.js component that displays a library of 7 BNPL provider logos (Affirm, Klarna, Afterpay, Sezzle, Zip, PayPal Credit, Generic BNPL) with a category filtering system and an interactive grid layout. The logos are integrated with professional Polaris UI, and SVG logo assets are stored in `/public/logos/`. The WidgetSettings.js has been updated to replace the file upload LogoSelector with the PredefinedLogoSelector, updating state management and save logic accordingly.",
+        "testStrategy": "Test the logo selection process by ensuring the selected logo is saved and displayed correctly in the admin UI. Verify that the logo selection works as specified in the original requirements and that all logos are displayed with their respective descriptions and status badges.",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create PredefinedLogoSelector.js component",
+            "description": "Develop the component that displays available logos from the predefined library.",
+            "status": "done",
+            "dependencies": [],
+            "details": "",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Create SVG logo assets",
+            "description": "Add SVG logo assets for each BNPL provider in the specified directory.",
+            "status": "done",
+            "dependencies": [],
+            "details": "",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Update WidgetSettings.js integration",
+            "description": "Replace the file upload LogoSelector with the PredefinedLogoSelector and update state management.",
+            "status": "done",
+            "dependencies": [],
+            "details": "",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Verify logo selection functionality",
+            "description": "Ensure that the logo selection process works correctly and that the selected logo is saved and displayed in the admin UI.",
+            "status": "done",
+            "dependencies": [],
+            "details": "",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "title": "Add BNPL Toggle Functionality",
+        "description": "Implement a comprehensive BNPL configuration system that includes a master toggle for enabling/disabling all BNPL options and individual provider toggles for 5 major BNPL providers (Affirm, Klarna, Afterpay, Sezzle, Zip). The system should also track provider counts with visual badges, include an advanced settings section with options for showing provider logos, showing payment breakdowns, and applying settings to all products. Additionally, warning banners for configuration guidance and a responsive grid layout with colored provider badges should be implemented, along with comprehensive state management integration.",
+        "status": "done",
+        "dependencies": [
+          6
+        ],
+        "priority": "medium",
+        "details": "Create the BNPLOptionsToggle.js component with full Polaris integration and accessibility compliance. Ensure that the component reflects the current state in the UI and provides granular control over BNPL provider configuration.",
+        "testStrategy": "Test the comprehensive BNPL configuration system to ensure that the master toggle and individual provider toggles correctly update the backend configuration and reflect changes in the UI. Verify that all advanced settings function as intended and that visual elements such as badges and banners are displayed correctly.",
+        "subtasks": []
+      },
+      {
+        "id": 9,
+        "title": "Implement Widget Placement Options",
+        "description": "Develop a comprehensive widget placement system that allows merchants to choose from six detailed placement options on the product page, including Product Page Top, Product Page Bottom, Near Add to Cart, Product Tabs, Sidebar, and Floating Widget. This system includes detailed descriptions and impact assessments for each placement, a visual preview system with modal dialogs showing layout mockups, and an interactive radio button selection with visual feedback.",
+        "status": "done",
+        "dependencies": [
+          6
+        ],
+        "priority": "medium",
+        "details": "The implementation features color-coded badges (Recommended, Popular, High Converting) and live preview functionality for placement options. The user interface is built with Polaris components and complies with accessibility standards. The main component is PlacementSelector.js, which provides comprehensive placement visualization and user guidance.",
+        "testStrategy": "Verify that the selected placement option is saved correctly and displayed in the admin UI. Additionally, ensure that the visual previews and impact assessments are accurate and accessible.",
+        "subtasks": []
+      },
+      {
+        "id": 10,
+        "title": "Create Theme App Extension for Widget Injection",
+        "description": "Develop the Theme App Extension to inject the widget into the product page using Shopify MCP tools.",
+        "status": "done",
+        "dependencies": [
+          4
+        ],
+        "priority": "high",
+        "details": "Use Shopify's MCP tools to create a custom app block. Implement logic to render the selected widget configuration on the product page. Utilize mcp_shopify-dev-mcp_get_started with the 'admin' API, mcp_shopify-dev-mcp_search_dev_docs for Theme App Extension documentation, and mcp_shopify-dev-mcp_introspect_admin_schema for understanding the GraphQL schema. The implementation should leverage these MCP tools for guidance and best practices.",
+        "testStrategy": "Deploy the app extension to a development store and verify that the widget appears correctly on the product page.",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Research MCP tools",
+            "description": "Investigate the MCP tools available for Shopify and how they can assist in the development of the Theme App Extension.",
+            "status": "done",
+            "dependencies": [],
+            "details": "",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Implement widget injection logic",
+            "description": "Create the logic to inject the widget into the product page.",
+            "status": "completed",
+            "dependencies": [],
+            "details": "",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Test widget appearance",
+            "description": "Verify that the widget appears correctly on the product page after deployment.",
+            "status": "completed",
+            "dependencies": [],
+            "details": "",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Update implementation approach",
+            "description": "Revise the implementation approach to incorporate the use of mcp_shopify-dev-mcp_get_started, mcp_shopify-dev-mcp_search_dev_docs, and mcp_shopify-dev-mcp_introspect_admin_schema.",
+            "status": "done",
+            "dependencies": [],
+            "details": "<info added on 2025-07-12T14:19:00.137Z>\nResearch completed using Shopify MCP tools. Here's the comprehensive implementation approach for the Theme App Extension:\n\n## Research Findings:\n\n### 1. Theme App Extension Structure\n- **Extension Type**: Theme app extension for widget injection\n- **Target**: Product pages using app blocks\n- **Framework**: Uses Shopify CLI 3.0+ with TOML configuration\n- **File Structure**:\n  - `/extensions/theme-app-extension/`\n    - `shopify.extension.toml` - Configuration file\n    - `blocks/` - Liquid files for app blocks\n    - `assets/` - CSS, JS, and static content\n    - `snippets/` - Reusable Liquid components\n    - `locales/` - Translation files\n\n### 2. App Block Configuration\n- **Block Type**: App block for product pages (`target: \"section\"`)\n- **Template Support**: Product pages using JSON templates\n- **Integration**: Merchants add blocks via theme editor\n- **Settings**: Configurable via schema in block files\n\n### 3. Implementation Strategy\n\n#### Phase 1: Extension Setup\n1. **Generate Extension**: `shopify app generate extension --template theme_app_extension`\n2. **Configure TOML**: Set up `shopify.extension.toml` with:\n   - Extension name and description\n   - Block targeting for product pages\n   - Asset references (CSS/JS)\n   - Merchant-configurable settings\n\n#### Phase 2: Widget Integration\n1. **Create App Block**: `blocks/bnpl-widget.liquid`\n   - Fetch widget configuration from API\n   - Render BNPL options based on settings\n   - Include conditional logic for different payment providers\n   - Support for logo display and placement options\n\n2. **Asset Development**: \n   - `assets/bnpl-widget.css` - Styling\n   - `assets/bnpl-widget.js` - Interactive functionality\n   - Logo assets for different BNPL providers\n\n#### Phase 3: Configuration Schema\n```liquid\n{% schema %}\n{\n  \"name\": \"BNPL Widget\",\n  \"target\": \"section\",\n  \"enabled_on\": {\n    \"templates\": [\"product\"]\n  },\n  \"settings\": [\n    {\n      \"type\": \"text\",\n      \"id\": \"widget_title\",\n      \"label\": \"Widget Title\",\n      \"default\": \"Buy Now, Pay Later Options\"\n    },\n    {\n      \"type\": \"select\",\n      \"id\": \"placement\",\n      \"label\": \"Placement\",\n      \"options\": [\n        {\"value\": \"price\", \"label\": \"Near Price\"},\n        {\"value\": \"cart\", \"label\": \"Add to Cart\"},\n        {\"value\": \"description\", \"label\": \"Product Description\"}\n      ]\n    }\n  ]\n}\n{% endschema %}\n```\n\n### 4. API Integration\n- **Widget Configuration**: Fetch from backend API (`/api/widgets`)\n- **Dynamic Content**: Use Liquid to access product data\n- **Conditional Rendering**: Show/hide based on product eligibility\n\n### 5. Theme Compatibility\n- **Online Store 2.0**: Full support with app blocks\n- **Legacy Themes**: Fallback to custom liquid sections\n- **Verification**: Use Admin API to check theme support\n\n### 6. Testing Strategy\n- **Development Store**: Test with generated test data\n- **Theme Editor**: Verify block placement and configuration\n- **Product Pages**: Test widget appearance and functionality\n- **Different Themes**: Ensure compatibility across theme types\n\n### 7. Deployment Process\n1. **Build Extension**: `shopify app build`\n2. **Deploy Version**: `shopify app deploy`\n3. **Release**: Create app version with extension\n4. **Merchant Installation**: Theme editor integration\n\nThis comprehensive approach leverages all the MCP tools research to ensure proper implementation following Shopify's best practices and guidelines.\n</info added on 2025-07-12T14:19:00.137Z>",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "title": "Implement Widget Rendering Logic",
+        "description": "Develop the logic to render the selected widget on the storefront.",
+        "details": "Create a script that dynamically loads the selected logos and BNPL widget based on the merchant's configuration. Ensure it handles different placements correctly.",
+        "testStrategy": "Test the widget rendering on various product pages to ensure it displays correctly in all specified placements.",
+        "priority": "high",
+        "dependencies": [
+          10
+        ],
+        "status": "in-progress",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create Widget Rendering Script",
+            "description": "Develop a script that dynamically loads the selected logos and BNPL widget based on the merchant's configuration.",
+            "dependencies": [],
+            "details": "The script should be able to fetch the configuration from the API and render the appropriate widget and logos on the storefront.",
+            "status": "pending",
+            "testStrategy": "Test the script by loading different configurations and ensuring the correct logos and widgets are displayed."
+          },
+          {
+            "id": 2,
+            "title": "Integrate API for Widget Configuration",
+            "description": "Connect the widget rendering logic to the existing RESTful API for fetching widget configurations.",
+            "dependencies": [
+              1
+            ],
+            "details": "Ensure that the rendering logic correctly interacts with the API to retrieve the necessary configuration data.",
+            "status": "pending",
+            "testStrategy": "Verify that the widget renders correctly based on the data returned from the API."
+          },
+          {
+            "id": 3,
+            "title": "Implement Placement Handling Logic",
+            "description": "Develop logic to handle different placements for the widget as per the merchant's configuration.",
+            "dependencies": [
+              2
+            ],
+            "details": "Ensure that the widget can be rendered in various specified placements on the product page.",
+            "status": "pending",
+            "testStrategy": "Test the widget in all specified placements to ensure it displays correctly."
+          },
+          {
+            "id": 4,
+            "title": "Conduct Cross-Browser Testing",
+            "description": "Test the widget rendering across different browsers to ensure compatibility.",
+            "dependencies": [
+              3
+            ],
+            "details": "Check for any rendering issues or discrepancies in how the widget appears in various browsers.",
+            "status": "pending",
+            "testStrategy": "Perform tests on major browsers (Chrome, Firefox, Safari, Edge) and document any issues."
+          },
+          {
+            "id": 5,
+            "title": "Finalize and Document Widget Rendering Logic",
+            "description": "Complete the implementation and document the widget rendering logic for future reference.",
+            "dependencies": [
+              4
+            ],
+            "details": "Ensure that all code is well-commented and that there is a clear documentation of how the rendering logic works.",
+            "status": "pending",
+            "testStrategy": "Review the documentation for clarity and completeness, ensuring it covers all aspects of the rendering logic."
+          }
+        ]
+      },
+      {
+        "id": 12,
+        "title": "Setup Testing Framework",
+        "description": "Configure Jest and React Testing Library for frontend and backend testing.",
+        "details": "Install Jest and React Testing Library. Set up initial test files for both frontend and backend components to ensure code quality and functionality.",
+        "testStrategy": "Run initial tests to confirm that the testing framework is correctly configured and functional.",
+        "priority": "medium",
+        "dependencies": [
+          2,
+          5
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 13,
+        "title": "Write Unit Tests for Backend Logic",
+        "description": "Develop unit tests for the backend API and business logic.",
+        "details": "Create test cases for each API endpoint and business logic function using Jest. Ensure all edge cases are covered.",
+        "testStrategy": "Run the tests and verify that all backend logic functions as expected without errors.",
+        "priority": "high",
+        "dependencies": [
+          4,
+          12
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 14,
+        "title": "Conduct UI Testing with React Testing Library",
+        "description": "Write tests for the React components in the admin UI.",
+        "details": "Use React Testing Library to create tests for each component in the admin UI, ensuring they render correctly and respond to user interactions.",
+        "testStrategy": "Run the UI tests and confirm that all components behave as expected.",
+        "priority": "medium",
+        "dependencies": [
+          6,
+          12
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 15,
+        "title": "Test Compatibility with Popular Shopify Themes",
+        "description": "Verify that the widget works with popular Shopify themes.",
+        "details": "Deploy the app to multiple development stores using different popular themes (Dawn, Debut, Craft, Refresh, Sense) and test widget functionality.",
+        "testStrategy": "Manually test the widget on each theme to ensure compatibility and correct rendering.",
+        "priority": "medium",
+        "dependencies": [
+          11
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 16,
+        "title": "Prepare Documentation for App Usage",
+        "description": "Create user documentation for merchants on how to use the BADGR app.",
+        "details": "Write clear and concise documentation covering installation, configuration, and usage of the BADGR app for merchants.",
+        "testStrategy": "Review documentation for clarity and completeness, ensuring it covers all necessary aspects of the app.",
+        "priority": "medium",
+        "dependencies": [
+          6
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 17,
+        "title": "Deploy Application to Vercel",
+        "description": "Deploy the Node.js backend and React frontend to Vercel for production use.",
+        "details": "Set up Vercel for deployment, configure environment variables, and ensure both frontend and backend are correctly deployed and accessible.",
+        "testStrategy": "Access the deployed application and verify that all functionalities work as expected in the production environment.",
+        "priority": "high",
+        "dependencies": [
+          2,
+          5
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 18,
+        "title": "Prepare for App Review Readiness",
+        "description": "Ensure the app meets requirements for future public listing.",
+        "details": "Prepare necessary documentation, including privacy policy, terms of service, and support contact information. Polish the admin UI for branding.",
+        "testStrategy": "Review all app components and documentation to ensure they meet Shopify's app review standards.",
+        "priority": "low",
+        "dependencies": [
+          16
+        ],
+        "status": "pending",
+        "subtasks": []
+      }
+    ],
+    "metadata": {
+      "created": "2025-07-12T12:39:07.259Z",
+      "updated": "2025-07-13T04:13:39.087Z",
+      "description": "Tasks for master context"
+    }
+  }
+}

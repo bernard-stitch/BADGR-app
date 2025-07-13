@@ -1,0 +1,140 @@
+{% comment %}
+BADGR BNPL Widget App Block
+Displays Buy Now Pay Later options on product pages
+{% endcomment %}
+
+{%- liquid
+  assign widget_id = block.settings.widget_id | default: 'default'
+  assign enabled_providers = block.settings.enabled_providers | split: ','
+  assign placement = block.settings.placement | default: 'below_price'
+  assign show_logos = block.settings.show_logos | default: true
+  assign custom_text = block.settings.custom_text
+-%}
+
+<div 
+  class="badgr-bnpl-widget" 
+  data-product-id="{{ product.id }}"
+  data-product-price="{{ product.price | money_without_currency }}"
+  data-product-currency="{{ cart.currency.iso_code }}"
+  data-widget-id="{{ widget_id }}"
+  data-placement="{{ placement }}"
+  data-show-logos="{{ show_logos }}"
+  {% if block.shopify_attributes %}{{ block.shopify_attributes }}{% endif %}
+>
+  {% if custom_text != blank %}
+    <div class="badgr-custom-text">{{ custom_text }}</div>
+  {% endif %}
+
+  <div class="badgr-bnpl-options" data-enabled-providers="{{ enabled_providers | join: ',' }}">
+    {% comment %} BNPL options will be injected here by JavaScript {% endcomment %}
+    <div class="badgr-loading">
+      <span class="badgr-loading-text">{{ block.settings.loading_text | default: 'Loading payment options...' }}</span>
+    </div>
+  </div>
+</div>
+
+{% comment %} Load BADGR widget assets {% endcomment %}
+{{ 'badgr-widget.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'badgr-widget.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "BADGR BNPL Widget",
+  "target": "section",
+  "available_if": "{{ app.metafields.badgr.enabled }}",
+  "settings": [
+    {
+      "type": "text",
+      "id": "widget_id",
+      "label": "Widget ID",
+      "default": "default",
+      "info": "Unique identifier for this widget instance"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_logos",
+      "label": "Show provider logos",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "placement",
+      "label": "Widget placement",
+      "options": [
+        {
+          "value": "above_price",
+          "label": "Above price"
+        },
+        {
+          "value": "below_price",
+          "label": "Below price"
+        },
+        {
+          "value": "below_add_to_cart",
+          "label": "Below add to cart button"
+        },
+        {
+          "value": "custom",
+          "label": "Custom position"
+        }
+      ],
+      "default": "below_price"
+    },
+    {
+      "type": "checkbox_group",
+      "id": "enabled_providers",
+      "label": "Enabled BNPL providers",
+      "options": [
+        {
+          "value": "klarna",
+          "label": "Klarna"
+        },
+        {
+          "value": "afterpay",
+          "label": "Afterpay"
+        },
+        {
+          "value": "affirm",
+          "label": "Affirm"
+        },
+        {
+          "value": "sezzle",
+          "label": "Sezzle"
+        },
+        {
+          "value": "zip",
+          "label": "Zip"
+        },
+        {
+          "value": "paypal_credit",
+          "label": "PayPal Credit"
+        }
+      ]
+    },
+    {
+      "type": "textarea",
+      "id": "custom_text",
+      "label": "Custom text",
+      "placeholder": "Enter custom text to display above BNPL options",
+      "info": "Optional text to display before the payment options"
+    },
+    {
+      "type": "text",
+      "id": "loading_text",
+      "label": "Loading text",
+      "default": "Loading payment options...",
+      "info": "Text shown while payment options are loading"
+    }
+  ],
+  "presets": [
+    {
+      "name": "BADGR BNPL Widget",
+      "settings": {
+        "placement": "below_price",
+        "show_logos": true,
+        "enabled_providers": ["klarna", "afterpay", "affirm"]
+      }
+    }
+  ]
+}
+{% endschema %} 

@@ -1,0 +1,50 @@
+{% comment %}
+BADGR Widget Embed Snippet
+Usage: {% render 'badgr-widget-embed', product: product, widget_id: 'my-widget', placement: 'below_price' %}
+{% endcomment %}
+
+{%- liquid
+  assign widget_id = widget_id | default: 'default'
+  assign placement = placement | default: 'below_price'
+  assign show_logos = show_logos | default: true
+  assign enabled_providers = enabled_providers | default: 'klarna,afterpay,affirm'
+  assign custom_text = custom_text | default: ''
+  assign loading_text = loading_text | default: 'Loading payment options...'
+  
+  unless product
+    assign product = product
+  endunless
+-%}
+
+{% if product %}
+<div 
+  class="badgr-bnpl-widget badgr-widget-snippet" 
+  data-product-id="{{ product.id }}"
+  data-product-price="{{ product.price | money_without_currency }}"
+  data-product-currency="{{ cart.currency.iso_code }}"
+  data-widget-id="{{ widget_id }}"
+  data-placement="{{ placement }}"
+  data-show-logos="{{ show_logos }}"
+>
+  {% if custom_text != blank %}
+    <div class="badgr-custom-text">{{ custom_text }}</div>
+  {% endif %}
+
+  <div class="badgr-bnpl-options" data-enabled-providers="{{ enabled_providers }}">
+    <div class="badgr-loading">
+      <span class="badgr-loading-text">{{ loading_text }}</span>
+    </div>
+  </div>
+</div>
+
+{% comment %} Load assets only once per page {% endcomment %}
+{% unless badgr_assets_loaded %}
+  {{ 'badgr-widget.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'badgr-widget.js' | asset_url }}" defer></script>
+  {% assign badgr_assets_loaded = true %}
+{% endunless %}
+
+{% else %}
+  {% comment %} Fallback when no product is available {% endcomment %}
+  <div class="badgr-error">BADGR Widget: Product not found</div>
+{% endif %} 

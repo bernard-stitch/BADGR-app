@@ -1,0 +1,8 @@
+api_version = "2023-10"
+
+[[extensions]]
+type = "theme_app_extension"
+name = "BADGR BNPL Widget"
+
+[extensions.settings]
+include_app_block = true 

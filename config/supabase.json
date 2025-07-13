@@ -1,0 +1,15 @@
+{
+  "project": {
+    "id": "rprltzscbxsqhigemejr",
+    "name": "BADGR",
+    "url": "https://rprltzscbxsqhigemejr.supabase.co",
+    "region": "us-east-1",
+    "status": "ACTIVE_HEALTHY"
+  },
+  "keys": {
+    "anon": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJwcmx0enNjYnhzcWhpZ2VtZWpyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIzMjI3NDAsImV4cCI6MjA2Nzg5ODc0MH0.FlPwvn4fCU_f8HAJH3_L3c3nsrxKX793pzJ9pvquccQ"
+  },
+  "database": {
+    "host": "db.rprltzscbxsqhigemejr.supabase.co"
+  }
+} 

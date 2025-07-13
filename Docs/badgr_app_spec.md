@@ -1,0 +1,113 @@
+# BADGR - Project Specification
+
+## Overview
+**Project Name:** BADGR ("Badger")  
+**Purpose:** BADGR is a Shopify merchant app that allows small merchants to visually add payment method logos and promotional widgets (e.g., BNPL prompts) to the product page without editing Liquid manually. The MVP targets the product page only, and future iterations may expand to support additional placements.
+
+---
+
+## Use Case & Motivation
+**Primary Use Case:**
+- Merchants want to show Apple Pay, Google Pay, Visa, SnapScan, etc. logos on product pages without editing code.
+- Merchants planning to launch a BNPL product (like Happy Pay) are required to display a product page widget for BNPL adoption.
+
+**Goals:**
+- Make logo/widget management self-serve.
+- Simplify display of trust/payment graphics.
+- Provide a future-proof scaffold for script-based widgets.
+
+---
+
+## MVP Feature Set
+
+### Widget Types
+- [x] Static logos from a predefined library (e.g., Visa, SnapScan, Apple Pay)
+- [x] BNPL-style HTML widget (embed a `<script>` with dynamic price)
+- [ ] Merchant-uploaded images: **Not in scope**
+- [ ] Paste-your-own-script: **Not in scope**
+
+### Configuration Options
+- [x] Logo selection from library
+- [x] BNPL toggle (on/off)
+- [x] Placement (above price / below add-to-cart)
+- [ ] Product/collection visibility targeting: **Not in MVP**
+- [ ] Image alignment/size: **Minimal only**
+
+### Admin UI
+- Embedded within Shopify Admin via App Bridge
+- React + Polaris UI
+- Display selected widgets
+- Allow toggling & placement selection
+
+### Theme Integration
+- Theme App Extension
+- Inject as a **custom app block**
+- Merchant can drag/drop block into Product page template
+
+### Backend
+- Hosted Node.js server (initially)
+- Configuration and state storage via **Supabase** (PostgreSQL + REST/Realtime/Edge APIs)
+- Persist config per merchant
+- Serve widget config to storefront extension
+
+### Testing & QA
+- TDD approach using Jest (React) and unit tests on backend logic
+- Test compatibility on popular Shopify themes:
+  - Dawn
+  - Debut
+  - Craft
+  - Refresh
+  - Sense
+- Deploy to multiple dev stores
+
+### MVP Constraints
+- Only 1 widget block per page
+- Only on **Product Page** (no Cart, Checkout, Home, or Thank You pages)
+- Free forever
+
+---
+
+## Tech Stack
+
+| Area | Tech |
+|------|------|
+| Admin UI | React + Polaris + App Bridge |
+| Backend | Node.js (hosted via Vercel), Supabase for config & persistence |
+| Storage | Supabase PostgreSQL tables per merchant |
+| Extensions | Theme App Extension (Liquid + JSON templates) |
+| CLI | Shopify CLI v3 with DevMCP support |
+| Testing | Jest + React Testing Library + mocked Shopify API calls |
+
+---
+
+## Future Roadmap
+- Support cart page and thank-you page blocks
+- Enable custom placement targeting (by product/collection)
+- Allow merchants to toggle widget visibility based on cart contents
+- Add performance tracking (views, clicks)
+- Consider usage-based metrics dashboard
+
+---
+
+## Naming, Branding & Distribution
+**App Name:** BADGR  
+**Logo:** Placeholder, optional at this stage  
+**Distribution:**
+- Initially unlisted/private for internal use and dev stores
+- Potential later App Store listing (prepare for App Review but not in MVP)
+- No billing integration (free forever)
+
+---
+
+## App Review Readiness (Later Phase)
+To prepare for public listing, future iterations will need:
+- Privacy policy and terms page
+- Support contact (hello@paymentsync.co.za)
+- Branded admin UI polish
+- Clear install + usage documentation
+
+---
+
+## Summary
+BADGR is a lightweight, focused Shopify app for inserting trust and BNPL widgets on product pages via Theme App Extensions. It will launch with a strict MVP scope but is architected to support more flexible placements and richer functionality over time.
+

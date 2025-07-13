@@ -1,0 +1,225 @@
+/**
+ * BADGR BNPL Widget Styles
+ * Theme App Extension CSS for Shopify stores
+ */
+
+.badgr-bnpl-widget {
+  margin: 1rem 0;
+  padding: 0.75rem;
+  border: 1px solid #e1e1e1;
+  border-radius: 8px;
+  background-color: #fafafa;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.badgr-custom-text {
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: #333;
+  font-weight: 500;
+}
+
+.badgr-bnpl-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.badgr-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  color: #666;
+}
+
+.badgr-loading-text {
+  font-size: 0.9rem;
+  margin-left: 0.5rem;
+}
+
+/* Loading spinner */
+.badgr-loading::before {
+  content: '';
+  width: 16px;
+  height: 16px;
+  border: 2px solid #e1e1e1;
+  border-top: 2px solid #007ace;
+  border-radius: 50%;
+  animation: badgr-spin 1s linear infinite;
+}
+
+@keyframes badgr-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* BNPL Option Styles */
+.badgr-bnpl-option {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.badgr-bnpl-option:hover {
+  border-color: #007ace;
+  box-shadow: 0 2px 4px rgba(0, 122, 206, 0.1);
+}
+
+.badgr-bnpl-option.selected {
+  border-color: #007ace;
+  background-color: #f0f8ff;
+}
+
+.badgr-bnpl-logo {
+  width: 60px;
+  height: 24px;
+  margin-right: 0.75rem;
+  object-fit: contain;
+}
+
+.badgr-bnpl-text {
+  flex: 1;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.badgr-bnpl-price {
+  font-weight: 600;
+  color: #007ace;
+}
+
+.badgr-bnpl-terms {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 0.25rem;
+}
+
+/* Provider-specific styling */
+.badgr-bnpl-option[data-provider="klarna"] {
+  border-color: #ffb3c1;
+}
+
+.badgr-bnpl-option[data-provider="klarna"]:hover {
+  border-color: #ff0080;
+}
+
+.badgr-bnpl-option[data-provider="afterpay"] {
+  border-color: #b2f5d1;
+}
+
+.badgr-bnpl-option[data-provider="afterpay"]:hover {
+  border-color: #00d4aa;
+}
+
+.badgr-bnpl-option[data-provider="affirm"] {
+  border-color: #c8e6ff;
+}
+
+.badgr-bnpl-option[data-provider="affirm"]:hover {
+  border-color: #0078ff;
+}
+
+.badgr-bnpl-option[data-provider="sezzle"] {
+  border-color: #e8d5ff;
+}
+
+.badgr-bnpl-option[data-provider="sezzle"]:hover {
+  border-color: #a166ff;
+}
+
+.badgr-bnpl-option[data-provider="zip"] {
+  border-color: #fff2b3;
+}
+
+.badgr-bnpl-option[data-provider="zip"]:hover {
+  border-color: #ffcc00;
+}
+
+.badgr-bnpl-option[data-provider="paypal_credit"] {
+  border-color: #b3d9ff;
+}
+
+.badgr-bnpl-option[data-provider="paypal_credit"]:hover {
+  border-color: #0070ba;
+}
+
+/* Error states */
+.badgr-error {
+  padding: 0.75rem;
+  border: 1px solid #ff6b6b;
+  border-radius: 6px;
+  background-color: #ffe0e0;
+  color: #d63031;
+  font-size: 0.9rem;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .badgr-bnpl-widget {
+    margin: 0.75rem 0;
+    padding: 0.5rem;
+  }
+  
+  .badgr-bnpl-option {
+    padding: 0.5rem;
+  }
+  
+  .badgr-bnpl-logo {
+    width: 50px;
+    height: 20px;
+    margin-right: 0.5rem;
+  }
+  
+  .badgr-bnpl-text {
+    font-size: 0.85rem;
+  }
+}
+
+/* No logos mode */
+.badgr-bnpl-widget[data-show-logos="false"] .badgr-bnpl-logo {
+  display: none;
+}
+
+.badgr-bnpl-widget[data-show-logos="false"] .badgr-bnpl-option {
+  padding-left: 0.75rem;
+}
+
+/* Accessibility */
+.badgr-bnpl-option:focus {
+  outline: 2px solid #007ace;
+  outline-offset: 2px;
+}
+
+.badgr-bnpl-option[aria-selected="true"] {
+  background-color: #f0f8ff;
+  border-color: #007ace;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .badgr-bnpl-widget {
+    background-color: #2a2a2a;
+    border-color: #444;
+    color: #e1e1e1;
+  }
+  
+  .badgr-bnpl-option {
+    background-color: #333;
+    border-color: #555;
+    color: #e1e1e1;
+  }
+  
+  .badgr-bnpl-option:hover {
+    background-color: #3a3a3a;
+  }
+  
+  .badgr-custom-text {
+    color: #e1e1e1;
+  }
+} 

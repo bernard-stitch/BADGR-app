@@ -1,0 +1,46 @@
+# External Service Integration via MCP Servers
+
+**Always use available MCP servers for external service integrations** instead of manual configuration or generic API calls.
+
+## **Supabase Integration**
+- **✅ USE**: `mcp_supabase_*` tools for all Supabase operations
+- **✅ DO**: Use MCP tools for project creation, database operations, migrations, etc.
+- **❌ DON'T**: Write manual Supabase client code or generic PostgreSQL connections
+- **❌ DON'T**: Use environment variables for Supabase config when MCP handles it
+
+### Available Supabase MCP Tools:
+- `mcp_supabase_list_projects` - List existing projects
+- `mcp_supabase_create_project` - Create new Supabase project
+- `mcp_supabase_get_project` - Get project details
+- `mcp_supabase_list_tables` - List database tables
+- `mcp_supabase_execute_sql` - Run SQL queries
+- `mcp_supabase_apply_migration` - Apply database migrations
+- `mcp_supabase_generate_typescript_types` - Generate TypeScript types
+
+## **Shopify Integration**
+- **✅ USE**: `mcp_shopify-dev-mcp_*` tools for Shopify app development
+- **✅ DO**: Use MCP tools for schema introspection, documentation, and guidance
+- **❌ DON'T**: Write Shopify integrations without consulting MCP guidance first
+
+### Available Shopify MCP Tools:
+- `mcp_shopify-dev-mcp_get_started` - Get started with Shopify APIs
+- `mcp_shopify-dev-mcp_search_dev_docs` - Search Shopify documentation
+- `mcp_shopify-dev-mcp_introspect_admin_schema` - Get GraphQL schema info
+- `mcp_shopify-dev-mcp_fetch_docs_by_path` - Fetch specific documentation
+
+## **Implementation Pattern**
+1. **Before implementing any external service integration**, check if MCP tools are available
+2. **Use MCP tools for initial setup** (project creation, configuration)
+3. **Use MCP tools for ongoing operations** (database queries, API calls)
+4. **Generate code that works with MCP-managed resources** (use generated types, endpoints)
+
+## **Task Updates**
+When working on tasks that involve external services:
+- Update task details to specify MCP tool usage
+- Include specific MCP tool references in implementation steps
+- Use MCP-generated configuration values (URLs, keys, etc.)
+
+## **Code Generation**
+- Generate code that uses MCP-provided connection details
+- Use MCP-generated TypeScript types for type safety
+- Reference MCP-managed resources in environment configuration

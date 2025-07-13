@@ -1,0 +1,51 @@
+/* App specific styles */
+.App {
+  min-height: 100vh;
+  background-color: #f6f6f7;
+}
+
+/* Custom styles for better spacing */
+.Polaris-Page {
+  padding: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .Polaris-Page {
+    padding: 10px;
+  }
+}
+
+/* Custom button styles */
+.Polaris-Button--primary {
+  background-color: #006fbb;
+}
+
+.Polaris-Button--primary:hover {
+  background-color: #005a9b;
+}
+
+/* Custom card styles */
+.Polaris-Card {
+  margin-bottom: 20px;
+}
+
+/* Dashboard specific styles */
+.dashboard-stats {
+  margin-top: 20px;
+}
+
+.quick-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Form styles */
+.form-section {
+  margin-bottom: 24px;
+}
+
+.form-section:last-child {
+  margin-bottom: 0;
+} 
