@@ -1,0 +1,136 @@
+# Task ID: 10
+# Title: Create Theme App Extension for Widget Injection
+# Status: done
+# Dependencies: 4
+# Priority: high
+# Description: Develop the Theme App Extension to inject the widget into the product page using Shopify MCP tools.
+# Details:
+Use Shopify's MCP tools to create a custom app block. Implement logic to render the selected widget configuration on the product page. Utilize mcp_shopify-dev-mcp_get_started with the 'admin' API, mcp_shopify-dev-mcp_search_dev_docs for Theme App Extension documentation, and mcp_shopify-dev-mcp_introspect_admin_schema for understanding the GraphQL schema. The implementation should leverage these MCP tools for guidance and best practices.
+
+# Test Strategy:
+Deploy the app extension to a development store and verify that the widget appears correctly on the product page.
+
+# Subtasks:
+## 1. Research MCP tools [done]
+### Dependencies: None
+### Description: Investigate the MCP tools available for Shopify and how they can assist in the development of the Theme App Extension.
+### Details:
+
+
+## 2. Implement widget injection logic [completed]
+### Dependencies: None
+### Description: Create the logic to inject the widget into the product page.
+### Details:
+
+
+## 3. Test widget appearance [completed]
+### Dependencies: None
+### Description: Verify that the widget appears correctly on the product page after deployment.
+### Details:
+
+
+## 4. Update implementation approach [done]
+### Dependencies: None
+### Description: Revise the implementation approach to incorporate the use of mcp_shopify-dev-mcp_get_started, mcp_shopify-dev-mcp_search_dev_docs, and mcp_shopify-dev-mcp_introspect_admin_schema.
+### Details:
+<info added on 2025-07-12T14:19:00.137Z>
+Research completed using Shopify MCP tools. Here's the comprehensive implementation approach for the Theme App Extension:
+
+## Research Findings:
+
+### 1. Theme App Extension Structure
+- **Extension Type**: Theme app extension for widget injection
+- **Target**: Product pages using app blocks
+- **Framework**: Uses Shopify CLI 3.0+ with TOML configuration
+- **File Structure**:
+  - `/extensions/theme-app-extension/`
+    - `shopify.extension.toml` - Configuration file
+    - `blocks/` - Liquid files for app blocks
+    - `assets/` - CSS, JS, and static content
+    - `snippets/` - Reusable Liquid components
+    - `locales/` - Translation files
+
+### 2. App Block Configuration
+- **Block Type**: App block for product pages (`target: "section"`)
+- **Template Support**: Product pages using JSON templates
+- **Integration**: Merchants add blocks via theme editor
+- **Settings**: Configurable via schema in block files
+
+### 3. Implementation Strategy
+
+#### Phase 1: Extension Setup
+1. **Generate Extension**: `shopify app generate extension --template theme_app_extension`
+2. **Configure TOML**: Set up `shopify.extension.toml` with:
+   - Extension name and description
+   - Block targeting for product pages
+   - Asset references (CSS/JS)
+   - Merchant-configurable settings
+
+#### Phase 2: Widget Integration
+1. **Create App Block**: `blocks/bnpl-widget.liquid`
+   - Fetch widget configuration from API
+   - Render BNPL options based on settings
+   - Include conditional logic for different payment providers
+   - Support for logo display and placement options
+
+2. **Asset Development**: 
+   - `assets/bnpl-widget.css` - Styling
+   - `assets/bnpl-widget.js` - Interactive functionality
+   - Logo assets for different BNPL providers
+
+#### Phase 3: Configuration Schema
+```liquid
+{% schema %}
+{
+  "name": "BNPL Widget",
+  "target": "section",
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "widget_title",
+      "label": "Widget Title",
+      "default": "Buy Now, Pay Later Options"
+    },
+    {
+      "type": "select",
+      "id": "placement",
+      "label": "Placement",
+      "options": [
+        {"value": "price", "label": "Near Price"},
+        {"value": "cart", "label": "Add to Cart"},
+        {"value": "description", "label": "Product Description"}
+      ]
+    }
+  ]
+}
+{% endschema %}
+```
+
+### 4. API Integration
+- **Widget Configuration**: Fetch from backend API (`/api/widgets`)
+- **Dynamic Content**: Use Liquid to access product data
+- **Conditional Rendering**: Show/hide based on product eligibility
+
+### 5. Theme Compatibility
+- **Online Store 2.0**: Full support with app blocks
+- **Legacy Themes**: Fallback to custom liquid sections
+- **Verification**: Use Admin API to check theme support
+
+### 6. Testing Strategy
+- **Development Store**: Test with generated test data
+- **Theme Editor**: Verify block placement and configuration
+- **Product Pages**: Test widget appearance and functionality
+- **Different Themes**: Ensure compatibility across theme types
+
+### 7. Deployment Process
+1. **Build Extension**: `shopify app build`
+2. **Deploy Version**: `shopify app deploy`
+3. **Release**: Create app version with extension
+4. **Merchant Installation**: Theme editor integration
+
+This comprehensive approach leverages all the MCP tools research to ensure proper implementation following Shopify's best practices and guidelines.
+</info added on 2025-07-12T14:19:00.137Z>
+

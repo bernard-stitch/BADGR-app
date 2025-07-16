@@ -1,0 +1,11 @@
+# Task ID: 17
+# Title: Deploy Application to Vercel
+# Status: pending
+# Dependencies: 2, 5
+# Priority: high
+# Description: Deploy the Node.js backend and React frontend to Vercel for production use.
+# Details:
+Set up Vercel for deployment, configure environment variables, and ensure both frontend and backend are correctly deployed and accessible.
+
+# Test Strategy:
+Access the deployed application and verify that all functionalities work as expected in the production environment.

@@ -29,7 +29,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET /api/widgets/:shopId - Get widget configuration by shop ID
+// GET /api/widgets/:shopId - Get widget configuration by shop ID or domain
 router.get('/:shopId', async (req, res) => {
   try {
     const { shopId } = req.params;
@@ -37,11 +37,29 @@ router.get('/:shopId', async (req, res) => {
     if (!shopId) {
       return res.status(400).json({
         success: false,
-        error: 'Shop ID is required'
+        error: 'Shop ID or domain is required'
       });
     }
     
-    const data = await widgetConfigService.getByShopId(shopId);
+    // Try to get by shop ID first, then by domain
+    let data = await widgetConfigService.getByShopId(shopId);
+    
+    // If not found by shop ID, try by domain
+    if (!data) {
+      try {
+        const { data: domainData, error } = await supabase
+          .from('widget_configurations')
+          .select('*')
+          .eq('shop_domain', shopId)
+          .single();
+        
+        if (!error && domainData) {
+          data = domainData;
+        }
+      } catch (domainError) {
+        console.warn('Failed to lookup by domain:', domainError);
+      }
+    }
     
     if (!data) {
       return res.status(404).json({
@@ -305,6 +323,211 @@ router.get('/stats/summary', async (req, res) => {
     res.status(500).json({
       success: false,
       error: 'Failed to fetch widget statistics',
+      message: error.message
+    });
+  }
+});
+
+// POST /api/widgets/:widgetId/options - Get BNPL options for a product
+router.post('/:widgetId/options', async (req, res) => {
+  try {
+    const { widgetId } = req.params;
+    const { productId, price, currency = 'USD', enabledProviders = [], placement } = req.body;
+    const shopDomain = req.headers['x-shopify-shop-domain'];
+    
+    if (!productId || !price) {
+      return res.status(400).json({
+        success: false,
+        error: 'productId and price are required'
+      });
+    }
+    
+    // Get widget configuration for this shop
+    let widgetConfig = null;
+    if (shopDomain) {
+      try {
+        const { data } = await supabase
+          .from('widget_configurations')
+          .select('*')
+          .eq('shop_domain', shopDomain)
+          .single();
+        widgetConfig = data;
+      } catch (error) {
+        console.warn('Widget configuration not found for shop:', shopDomain);
+      }
+    }
+    
+    // Generate BNPL options based on enabled providers
+    const options = await generateBNPLOptions({
+      productId,
+      price: parseFloat(price),
+      currency,
+      enabledProviders,
+      placement,
+      widgetConfig,
+      shopDomain
+    });
+    
+    res.json({
+      success: true,
+      options,
+      productId,
+      price,
+      currency,
+      widgetId
+    });
+  } catch (error) {
+    console.error('Error generating BNPL options:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to generate BNPL options',
+      message: error.message
+    });
+  }
+});
+
+// Helper function to generate BNPL options
+async function generateBNPLOptions({ productId, price, currency, enabledProviders, placement, widgetConfig, shopDomain }) {
+  const options = [];
+  
+  // BNPL provider configurations
+  const providerConfigs = {
+    klarna: {
+      displayName: 'Klarna',
+      logoUrl: `${shopDomain ? `https://${shopDomain}` : ''}/apps/badgr/assets/klarna-logo.svg`,
+      minAmount: 1,
+      maxAmount: 10000,
+      installments: 4,
+      eligibilityRules: (price) => price >= 1 && price <= 10000
+    },
+    afterpay: {
+      displayName: 'Afterpay',
+      logoUrl: `${shopDomain ? `https://${shopDomain}` : ''}/apps/badgr/assets/afterpay-logo.svg`,
+      minAmount: 1,
+      maxAmount: 2000,
+      installments: 4,
+      eligibilityRules: (price) => price >= 1 && price <= 2000
+    },
+    affirm: {
+      displayName: 'Affirm',
+      logoUrl: `${shopDomain ? `https://${shopDomain}` : ''}/apps/badgr/assets/affirm-logo.svg`,
+      minAmount: 50,
+      maxAmount: 30000,
+      installments: 3,
+      eligibilityRules: (price) => price >= 50 && price <= 30000
+    },
+    sezzle: {
+      displayName: 'Sezzle',
+      logoUrl: `${shopDomain ? `https://${shopDomain}` : ''}/apps/badgr/assets/sezzle-logo.svg`,
+      minAmount: 1,
+      maxAmount: 2500,
+      installments: 4,
+      eligibilityRules: (price) => price >= 1 && price <= 2500
+    },
+    zip: {
+      displayName: 'Zip',
+      logoUrl: `${shopDomain ? `https://${shopDomain}` : ''}/apps/badgr/assets/zip-logo.svg`,
+      minAmount: 1,
+      maxAmount: 1500,
+      installments: 4,
+      eligibilityRules: (price) => price >= 1 && price <= 1500
+    },
+    paypal_credit: {
+      displayName: 'PayPal Credit',
+      logoUrl: `${shopDomain ? `https://${shopDomain}` : ''}/apps/badgr/assets/paypal-credit-logo.svg`,
+      minAmount: 99,
+      maxAmount: 10000,
+      installments: 6,
+      eligibilityRules: (price) => price >= 99 && price <= 10000
+    }
+  };
+  
+  // Process each enabled provider
+  for (const provider of enabledProviders) {
+    const config = providerConfigs[provider];
+    if (!config) continue;
+    
+    const isEligible = config.eligibilityRules(price);
+    
+    if (isEligible) {
+      const installmentAmount = (price / config.installments).toFixed(2);
+      const installmentText = `${config.installments} payments of ${currency === 'USD' ? '$' : ''}${installmentAmount}`;
+      
+      options.push({
+        provider,
+        displayName: config.displayName,
+        logoUrl: config.logoUrl,
+        installmentText,
+        terms: `Interest-free installments`,
+        isEligible: true,
+        redirectUrl: generateProviderRedirectUrl(provider, {
+          productId,
+          price,
+          currency,
+          shopDomain
+        })
+      });
+    }
+  }
+  
+  return options;
+}
+
+// Helper function to generate provider redirect URLs
+function generateProviderRedirectUrl(provider, { productId, price, currency, shopDomain }) {
+  const baseUrls = {
+    klarna: 'https://www.klarna.com/us/shopping/checkout',
+    afterpay: 'https://www.afterpay.com/checkout',
+    affirm: 'https://www.affirm.com/apps/checkout',
+    sezzle: 'https://checkout.sezzle.com',
+    zip: 'https://zip.co/checkout',
+    paypal_credit: 'https://www.paypal.com/credit'
+  };
+  
+  const baseUrl = baseUrls[provider];
+  if (!baseUrl) return '#';
+  
+  // Create checkout URL with product information
+  const params = new URLSearchParams({
+    amount: price.toString(),
+    currency,
+    product_id: productId,
+    shop_domain: shopDomain || '',
+    return_url: `${shopDomain}/checkout/complete`,
+    cancel_url: `${shopDomain}/cart`
+  });
+  
+  return `${baseUrl}?${params.toString()}`;
+}
+
+// POST /api/widgets/track - Track widget events for analytics
+router.post('/track', async (req, res) => {
+  try {
+    const { event, data, timestamp, url, userAgent } = req.body;
+    const shopDomain = req.headers['x-shopify-shop-domain'];
+    
+    // Log the event (in production, you'd want to send to analytics service)
+    console.log('Widget Analytics Event:', {
+      event,
+      data,
+      timestamp,
+      url,
+      userAgent,
+      shopDomain
+    });
+    
+    // In production, you could store this in a separate analytics table
+    // or send to services like Google Analytics, Mixpanel, etc.
+    
+    res.json({
+      success: true,
+      message: 'Event tracked successfully'
+    });
+  } catch (error) {
+    console.error('Error tracking event:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to track event',
       message: error.message
     });
   }

@@ -1,0 +1,31 @@
+# Task ID: 1
+# Title: Setup Project Repository
+# Status: done
+# Dependencies: None
+# Priority: medium
+# Description: Clone the existing Git repository for the BADGR project and set up the initial directory structure.
+# Details:
+Clone the repository from GitHub at https://github.com/bernard-stitch/BADGR.git. Set up the initial directory structure for the frontend and backend components. Include a README.md file with project overview and setup instructions.
+
+# Test Strategy:
+Verify repository cloning and initial structure by checking the presence of key files and directories.
+
+# Subtasks:
+## 1. Clone the GitHub repository [done]
+### Dependencies: None
+### Description: Clone the repository from https://github.com/bernard-stitch/BADGR.git.
+### Details:
+
+
+## 2. Set up initial directory structure [done]
+### Dependencies: None
+### Description: Create the necessary directories for frontend and backend components.
+### Details:
+
+
+## 3. Create README.md file [completed]
+### Dependencies: None
+### Description: Include project overview and setup instructions in the README.md file.
+### Details:
+
+

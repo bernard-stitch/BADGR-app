@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "name": "badgr",
+  "buildCommand": "cd src/frontend && npm install && npm run build",
+  "outputDirectory": "src/frontend/dist",
+  "installCommand": "npm install",
+  "devCommand": "cd src/frontend && npm run dev",
+  "framework": "vite",
+  "functions": {
+    "api/**.js": {
+      "runtime": "nodejs18.x"
+    }
+  },
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  }
+} 

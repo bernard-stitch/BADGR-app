@@ -1,0 +1,52 @@
+# Task ID: 16
+# Title: Prepare Documentation for App Usage
+# Status: in-progress
+# Dependencies: 6
+# Priority: medium
+# Description: Create user documentation for merchants on how to use the BADGR app.
+# Details:
+Write clear and concise documentation covering installation, configuration, and usage of the BADGR app for merchants.
+
+# Test Strategy:
+Review documentation for clarity and completeness, ensuring it covers all necessary aspects of the app.
+
+# Subtasks:
+## 1. Draft Installation Guide [done]
+### Dependencies: None
+### Description: Create a step-by-step guide for merchants on how to install the BADGR app.
+### Details:
+Include details on where to find the app, how to download it, and any prerequisites for installation.
+<info added on 2025-07-13T05:55:42.180Z>
+The installation guide has been completed successfully and includes a comprehensive overview of the installation process for the BADGR app. It is located in the file `Docs/INSTALLATION_GUIDE.md` and consists of approximately 200 lines of detailed, merchant-friendly content. The guide covers pre-installation requirements, the step-by-step discovery and installation process from the Shopify App Store, initial setup and verification steps, and a troubleshooting section addressing four common issues. It also provides clear next steps, navigation to other guides, and support contact information. The guide is designed with user experience in mind, featuring a clear table of contents, visual indicators for success and failure states, and friendly, non-technical language appropriate for merchants.
+</info added on 2025-07-13T05:55:42.180Z>
+
+## 2. Create Configuration Instructions [done]
+### Dependencies: 16.1
+### Description: Develop instructions for configuring the BADGR app after installation.
+### Details:
+Outline the configuration steps, including setting up user accounts and preferences.
+<info added on 2025-07-13T05:58:12.322Z>
+The configuration guide has been completed successfully, providing a comprehensive resource for merchants to optimize their BADGR setup. It includes detailed instructions on basic and advanced settings, feature coverage, user experience enhancements, and practical business guidance to maximize conversion impact while ensuring an excellent user experience. The guide is approximately 370 lines long and is merchant-friendly, covering all necessary aspects for effective configuration.
+</info added on 2025-07-13T05:58:12.322Z>
+
+## 3. Write Daily Usage Scenarios [done]
+### Dependencies: 16.2
+### Description: Document common daily usage scenarios for merchants using the BADGR app.
+### Details:
+Provide practical examples of how merchants can utilize the app in their daily operations.
+<info added on 2025-07-13T05:59:51.450Z>
+The daily usage guide has been completed successfully, providing merchants with a comprehensive resource to efficiently manage and optimize their BADGR app. It includes practical scenarios for daily tasks, time-efficient routines, performance management strategies, business-focused content, and actionable workflows. The guide is designed to maximize business impact while minimizing time investment.
+</info added on 2025-07-13T05:59:51.450Z>
+
+## 4. Develop Theme Integration Guide [done]
+### Dependencies: 16.3
+### Description: Create a guide for integrating the BADGR app with merchant themes.
+### Details:
+Include instructions on how to customize the app's appearance to match the merchant's branding.
+
+## 5. Compile Troubleshooting Section [done]
+### Dependencies: 16.4
+### Description: Draft a troubleshooting section to assist merchants with common issues.
+### Details:
+List common problems and their solutions to help merchants resolve issues independently.
+

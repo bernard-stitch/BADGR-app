@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dawn Theme Compatibility Test - BADGR Widget</title>
+    
+    <!-- Simulate Dawn theme CSS structure -->
+    <style>
+        /* Dawn theme simulation */
+        .product {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        .product__media {
+            background: #f5f5f5;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .product__info {
+            padding: 1rem;
+        }
+        
+        .product__title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        /* Dawn theme price structure */
+        .price__container {
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .price__regular {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .price__sale {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #d32f2f;
+        }
+        
+        .price__compare {
+            font-size: 1.2rem;
+            color: #666;
+            text-decoration: line-through;
+        }
+        
+        /* Dawn theme form structure */
+        .product-form {
+            margin: 1.5rem 0;
+        }
+        
+        .product-form__buttons {
+            margin: 1rem 0;
+        }
+        
+        .product-form__cart-submit {
+            background: #000;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 0;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+        }
+        
+        .product-form__cart-submit:hover {
+            background: #333;
+        }
+        
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .product {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+            
+            .product__title {
+                font-size: 1.5rem;
+            }
+            
+            .price__regular, .price__sale {
+                font-size: 1.3rem;
+            }
+        }
+        
+        /* Test highlighting */
+        .test-highlight {
+            background: yellow !important;
+            padding: 0.5rem !important;
+            border: 2px solid red !important;
+        }
+        
+        .test-info {
+            background: #e3f2fd;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+        
+        .test-results {
+            background: #f1f8e9;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-info">
+        <h1>🧪 Dawn Theme Compatibility Test</h1>
+        <p><strong>Testing:</strong> BADGR Widget Dawn-specific selectors and placement logic</p>
+        <p><strong>Simulating:</strong> Dawn theme product page structure</p>
+    </div>
+
+    <!-- Simulate Dawn theme product page structure -->
+    <div class="product">
+        <div class="product__media">
+            <p>[Product Image Placeholder]</p>
+        </div>
+        
+        <div class="product__info">
+            <h1 class="product__title">Sample Product - Dawn Theme Test</h1>
+            
+            <!-- Dawn theme price structure -->
+            <div class="price__container">
+                <span class="price__sale">$79.99</span>
+                <span class="price__compare">$99.99</span>
+            </div>
+            
+            <!-- Product form with Dawn theme structure -->
+            <form class="product-form">
+                <div class="product-form__buttons">
+                    <button type="submit" class="btn product-form__cart-submit">
+                        Add to cart
+                    </button>
+                </div>
+            </form>
+            
+            <!-- BADGR Widget Test Area -->
+            <div class="badgr-bnpl-widget" 
+                 data-product-id="test-product-123"
+                 data-product-price="79.99"
+                 data-product-currency="USD"
+                 data-widget-id="dawn-test"
+                 data-placement="below_price"
+                 data-show-logos="true">
+                
+                <div class="badgr-custom-text">Test: Dawn Theme Integration</div>
+                
+                <div class="badgr-bnpl-options" data-enabled-providers="klarna,afterpay,affirm">
+                    <div class="badgr-loading">
+                        <span class="badgr-loading-text">Loading payment options...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Test Controls -->
+    <div class="test-info">
+        <h2>🎛️ Test Controls</h2>
+        <button onclick="testPlacement('above_price')">Test: Above Price</button>
+        <button onclick="testPlacement('below_price')">Test: Below Price</button>
+        <button onclick="testPlacement('below_add_to_cart')">Test: Below Add to Cart</button>
+        <button onclick="testPlacement('custom')">Test: Custom Position</button>
+        <br><br>
+        <button onclick="testResponsive()">Test: Responsive Behavior</button>
+        <button onclick="testSelectors()">Test: Dawn Selectors</button>
+        <button onclick="clearHighlights()">Clear Highlights</button>
+    </div>
+
+    <div class="test-results" id="test-results">
+        <strong>Test Results:</strong><br>
+        Ready to begin testing...
+    </div>
+
+    <!-- Load BADGR widget assets -->
+    <link rel="stylesheet" href="assets/badgr-widget.css">
+    <script src="assets/badgr-widget.js"></script>
+
+    <script>
+        // Testing utilities
+        function logResult(message) {
+            const results = document.getElementById('test-results');
+            results.innerHTML += '<br>' + new Date().toLocaleTimeString() + ': ' + message;
+        }
+
+        function clearHighlights() {
+            document.querySelectorAll('.test-highlight').forEach(el => {
+                el.classList.remove('test-highlight');
+            });
+            logResult('✅ Highlights cleared');
+        }
+
+        function testSelectors() {
+            clearHighlights();
+            logResult('🔍 Testing Dawn theme selectors...');
+            
+            // Test price selectors
+            const priceElements = [
+                '.price__container',
+                '.price__regular', 
+                '.price__sale'
+            ];
+            
+            priceElements.forEach(selector => {
+                const element = document.querySelector(selector);
+                if (element) {
+                    element.classList.add('test-highlight');
+                    logResult(`✅ Found Dawn price selector: ${selector}`);
+                } else {
+                    logResult(`❌ Dawn price selector not found: ${selector}`);
+                }
+            });
+            
+            // Test button selectors
+            const buttonSelectors = [
+                '.product-form__buttons .btn',
+                '.product-form__cart-submit'
+            ];
+            
+            buttonSelectors.forEach(selector => {
+                const element = document.querySelector(selector);
+                if (element) {
+                    element.classList.add('test-highlight');
+                    logResult(`✅ Found Dawn button selector: ${selector}`);
+                } else {
+                    logResult(`❌ Dawn button selector not found: ${selector}`);
+                }
+            });
+        }
+
+        function testPlacement(placement) {
+            clearHighlights();
+            logResult(`🎯 Testing placement: ${placement}`);
+            
+            const widget = document.querySelector('.badgr-bnpl-widget');
+            widget.dataset.placement = placement;
+            
+            // Simulate widget placement logic
+            if (placement === 'above_price') {
+                const priceContainer = document.querySelector('.price__container');
+                if (priceContainer) {
+                    priceContainer.classList.add('test-highlight');
+                    logResult(`✅ Target found for above_price: .price__container`);
+                }
+            } else if (placement === 'below_price') {
+                const priceContainer = document.querySelector('.price__container');
+                if (priceContainer) {
+                    priceContainer.classList.add('test-highlight');
+                    logResult(`✅ Target found for below_price: .price__container`);
+                }
+            } else if (placement === 'below_add_to_cart') {
+                const addToCartBtn = document.querySelector('.product-form__cart-submit');
+                if (addToCartBtn) {
+                    addToCartBtn.classList.add('test-highlight');
+                    logResult(`✅ Target found for below_add_to_cart: .product-form__cart-submit`);
+                }
+            } else if (placement === 'custom') {
+                logResult(`✅ Custom placement: Widget stays in current position`);
+            }
+            
+            // Update widget CSS class
+            widget.className = widget.className.replace(/badgr-placement-\w+/g, '');
+            widget.classList.add(`badgr-placement-${placement}`);
+            logResult(`✅ Applied CSS class: badgr-placement-${placement}`);
+        }
+
+        function testResponsive() {
+            logResult('📱 Testing responsive behavior...');
+            
+            // Simulate mobile viewport
+            const viewport = document.querySelector('meta[name=viewport]');
+            logResult(`✅ Viewport configured: ${viewport.content}`);
+            
+            // Check CSS media queries
+            const styles = window.getComputedStyle(document.querySelector('.badgr-bnpl-widget'));
+            logResult(`✅ Widget margin: ${styles.margin}`);
+            
+            // Check for mobile-specific styles
+            const isMobileView = window.innerWidth <= 768;
+            logResult(`✅ Current view: ${isMobileView ? 'Mobile' : 'Desktop'} (${window.innerWidth}px)`);
+        }
+
+        // Initialize widget when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            logResult('🚀 Dawn theme test page loaded');
+            logResult('🎯 BADGR Widget initialization starting...');
+            
+            // Check if our CSS and JS loaded
+            const cssLoaded = document.querySelector('link[href*="badgr-widget.css"]');
+            const jsLoaded = document.querySelector('script[src*="badgr-widget.js"]');
+            
+            if (cssLoaded) logResult('✅ Widget CSS loaded');
+            if (jsLoaded) logResult('✅ Widget JS loaded');
+            
+            // Look for widget elements
+            const widget = document.querySelector('.badgr-bnpl-widget');
+            if (widget) {
+                logResult('✅ Widget element found on page');
+                logResult(`📊 Widget config: ${JSON.stringify({
+                    productId: widget.dataset.productId,
+                    price: widget.dataset.productPrice,
+                    placement: widget.dataset.placement,
+                    providers: widget.querySelector('.badgr-bnpl-options')?.dataset.enabledProviders
+                })}`);
+            }
+            
+            logResult('✨ Ready for testing! Use the buttons above to test different aspects.');
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,55 @@
+# Task ID: 3
+# Title: Integrate Supabase for Configuration Storage
+# Status: done
+# Dependencies: 2
+# Priority: high
+# Description: Connect the Node.js backend to Supabase for storing merchant configurations using MCP tools. Utilize the actual Supabase project details for configuration.
+# Details:
+Utilize Supabase MCP tools for project creation and database setup. The BADGR project has been created with the following details: Project ID: rprltzscbxsqhigemejr, URL: https://rprltzscbxsqhigemejr.supabase.co, Anon Key: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJwcmx0enNjYnhzcWhpZ2VtZWpyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIzMjI3NDAsImV4cCI6MjA2Nzg5ODc0MH0.FlPwvn4fCU_f8HAJH3_L3c3nsrxKX793pzJ9pvquccQ, Region: us-east-1, Status: ACTIVE_HEALTHY. Use mcp_supabase_apply_migration for database schema setup, and mcp_supabase_generate_typescript_types for TypeScript integration. Perform database operations using mcp_supabase_execute_sql.
+
+# Test Strategy:
+Create a test merchant configuration and verify it can be stored and retrieved from the Supabase database using the MCP tools.
+
+# Subtasks:
+## 1. Create BADGR project using MCP tools [done]
+### Dependencies: None
+### Description: Use mcp_supabase_create_project to create the BADGR project.
+### Details:
+
+
+## 2. Retrieve connection details [completed]
+### Dependencies: None
+### Description: Use mcp_supabase_get_project_url and mcp_supabase_get_anon_key to get connection details.
+### Details:
+Project ID: rprltzscbxsqhigemejr, URL: https://rprltzscbxsqhigemejr.supabase.co, Anon Key: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJwcmx0enNjYnhzcWhpZ2VtZWpyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIzMjI3NDAsImV4cCI6MjA2Nzg5ODc0MH0.FlPwvn4fCU_f8HAJH3_L3c3nsrxKX793pzJ9pvquccQ, Region: us-east-1, Status: ACTIVE_HEALTHY.
+
+## 3. Set up database schema [done]
+### Dependencies: None
+### Description: Use mcp_supabase_apply_migration for database schema setup.
+### Details:
+
+
+## 4. Generate TypeScript types [done]
+### Dependencies: None
+### Description: Use mcp_supabase_generate_typescript_types for TypeScript integration.
+### Details:
+
+
+## 5. Perform database operations [done]
+### Dependencies: None
+### Description: Use mcp_supabase_execute_sql for database operations.
+### Details:
+
+
+## 6. Set up environment variables [done]
+### Dependencies: None
+### Description: Configure environment variables with the actual Supabase project details.
+### Details:
+Set the following environment variables: SUPABASE_URL=https://rprltzscbxsqhigemejr.supabase.co, SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJwcmx0enNjYnhzcWhpZ2VtZWpyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIzMjI3NDAsImV4cCI6MjA2Nzg5ODc0MH0.FlPwvn4fCU_f8HAJH3_L3c3nsrxKX793pzJ9pvquccQ.
+
+## 7. Create widget configuration table schema [done]
+### Dependencies: None
+### Description: Define the schema for the widget configuration table in the Supabase database.
+### Details:
+Ensure the schema includes necessary fields for widget configurations.
+

@@ -1,0 +1,43 @@
+# Task ID: 2
+# Title: Configure Node.js Backend
+# Status: done
+# Dependencies: 1
+# Priority: high
+# Description: Set up the Node.js server for the BADGR application.
+# Details:
+Initialize a Node.js application using npm. Install necessary packages like Express for server handling and Supabase client for database interactions. Create a basic server file to listen on a specified port.
+
+# Test Strategy:
+Run the server and ensure it starts without errors. Test the server endpoint with a simple GET request.
+
+# Subtasks:
+## 1. Initialize Node.js Application [done]
+### Dependencies: None
+### Description: Set up a new Node.js application using npm.
+### Details:
+Run 'npm init -y' in the src/backend/ directory to create a package.json file.
+
+## 2. Install Required Packages [done]
+### Dependencies: 2.1
+### Description: Install Express and Supabase client packages.
+### Details:
+Run 'npm install express @supabase/supabase-js' in the src/backend/ directory to install necessary packages.
+
+## 3. Create Basic Server File [done]
+### Dependencies: 2.2
+### Description: Create a server file to handle requests.
+### Details:
+Create a file named server.js in the src/backend/ directory and set up a basic Express server.
+
+## 4. Configure Supabase Client [done]
+### Dependencies: 2.3
+### Description: Set up the Supabase client for database interactions.
+### Details:
+In server.js, import the Supabase client and initialize it with the project URL and API key.
+
+## 5. Set Up Server Listening Port [done]
+### Dependencies: 2.4
+### Description: Configure the server to listen on a specified port.
+### Details:
+In server.js, use app.listen() to set the server to listen on a defined port, e.g., 3000.
+

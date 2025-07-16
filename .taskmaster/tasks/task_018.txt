@@ -1,0 +1,11 @@
+# Task ID: 18
+# Title: Prepare for App Review Readiness
+# Status: pending
+# Dependencies: 16
+# Priority: low
+# Description: Ensure the app meets requirements for future public listing.
+# Details:
+Prepare necessary documentation, including privacy policy, terms of service, and support contact information. Polish the admin UI for branding.
+
+# Test Strategy:
+Review all app components and documentation to ensure they meet Shopify's app review standards.

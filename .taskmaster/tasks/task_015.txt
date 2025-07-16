@@ -1,0 +1,49 @@
+# Task ID: 15
+# Title: Test Compatibility with Popular Shopify Themes
+# Status: in-progress
+# Dependencies: 11
+# Priority: medium
+# Description: Verify that the widget works with popular Shopify themes.
+# Details:
+Deploy the app to multiple development stores using different popular themes (Dawn, Debut, Craft, Refresh, Sense) and test widget functionality.
+
+# Test Strategy:
+Manually test the widget on each theme to ensure compatibility and correct rendering.
+
+# Subtasks:
+## 1. Test Dawn Theme Compatibility [pending]
+### Dependencies: None
+### Description: Verify widget works correctly with Shopify's Dawn theme (most popular theme)
+### Details:
+Test widget placement, BNPL provider display, responsive design, and checkout integration on Dawn theme. Verify our theme-specific selectors work correctly.
+
+## 2. Test Classic Themes (Debut, Brooklyn, Minimal) [pending]
+### Dependencies: None
+### Description: Validate widget functionality on popular classic Shopify themes
+### Details:
+Test Debut, Brooklyn, and Minimal themes to ensure widget placement detection works correctly. These themes have different DOM structures that our generic selectors should handle.
+
+## 3. Test Modern Premium Themes (Craft, Refresh, Sense) [pending]
+### Dependencies: None
+### Description: Verify compatibility with modern premium themes that may have complex layouts
+### Details:
+Test Craft, Refresh, and Sense themes which often have more complex product page layouts. Ensure our placement logic handles advanced theme features like quick view, variant selectors, etc.
+
+## 4. Validate Responsive Design Across Themes [pending]
+### Dependencies: None
+### Description: Test widget responsive behavior on mobile and desktop for all themes
+### Details:
+Verify widget displays correctly on mobile (320px-768px) and desktop (768px+) for each tested theme. Check touch targets, font sizes, and layout integrity across different screen sizes.
+
+## 5. Verify BNPL Provider Integration Across Themes [pending]
+### Dependencies: None
+### Description: Test that all 6 BNPL providers work correctly across different themes
+### Details:
+For each theme, verify that Klarna, Afterpay, Affirm, Sezzle, Zip, and PayPal Credit display correctly, show appropriate price ranges, and generate proper checkout links. Test provider enable/disable functionality.
+
+## 6. Create Theme Compatibility Documentation [pending]
+### Dependencies: None
+### Description: Document theme testing results and create compatibility guide for merchants
+### Details:
+Create comprehensive documentation showing which themes have been tested, any theme-specific considerations, installation notes, and troubleshooting guidance. Include screenshots and compatibility matrix.
+

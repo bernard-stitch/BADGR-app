@@ -201,6 +201,125 @@
   border-color: #007ace;
 }
 
+/* Placement-specific styles */
+.badgr-placement-above_price {
+  margin-bottom: 1rem;
+  margin-top: 0.5rem;
+}
+
+.badgr-placement-below_price {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.badgr-placement-below_add_to_cart {
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.badgr-placement-custom {
+  /* Custom placement - merchant controls positioning */
+  margin: 1rem 0;
+}
+
+/* Responsive placement adjustments */
+@media (max-width: 768px) {
+  .badgr-placement-above_price,
+  .badgr-placement-below_price,
+  .badgr-placement-below_add_to_cart {
+    margin-top: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+}
+
+/* Browser-specific compatibility styles */
+
+/* Internet Explorer fixes */
+.badgr-ie .badgr-bnpl-widget {
+  border: 1px solid #e1e1e1; /* IE doesn't support border-radius fallback */
+  border-radius: 0; /* Remove border-radius for IE */
+}
+
+.badgr-ie .badgr-bnpl-option {
+  border-radius: 0;
+}
+
+.badgr-ie .badgr-loading::before {
+  /* IE doesn't support CSS animations, hide spinner */
+  display: none;
+}
+
+/* Safari fixes */
+.badgr-safari .badgr-bnpl-option {
+  -webkit-appearance: none; /* Remove Safari button styling */
+  -webkit-transform: translateZ(0); /* Force hardware acceleration */
+}
+
+.badgr-safari .badgr-bnpl-logo {
+  -webkit-transform: translateZ(0); /* Fix logo rendering */
+}
+
+/* Firefox fixes */
+.badgr-firefox .badgr-bnpl-option {
+  -moz-appearance: none; /* Remove Firefox button styling */
+}
+
+.badgr-firefox .badgr-bnpl-option::-moz-focus-inner {
+  border: 0; /* Remove Firefox inner border */
+}
+
+/* Edge fixes */
+.badgr-edge .badgr-bnpl-option {
+  -ms-appearance: none; /* Remove Edge button styling */
+}
+
+/* Mobile-specific styles */
+.badgr-mobile .badgr-bnpl-widget {
+  font-size: 16px; /* Prevent zoom on iOS */
+  -webkit-text-size-adjust: 100%;
+}
+
+.badgr-mobile .badgr-bnpl-option {
+  min-height: 44px; /* iOS minimum touch target */
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+}
+
+.badgr-mobile .badgr-bnpl-logo {
+  max-width: 45px; /* Smaller logos on mobile */
+  height: 18px;
+}
+
+/* Cross-browser support for flexbox */
+.badgr-bnpl-options {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.badgr-bnpl-option {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.badgr-bnpl-text {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
   .badgr-bnpl-widget {

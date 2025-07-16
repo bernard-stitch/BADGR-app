@@ -1,0 +1,9 @@
+{
+  "name": "@badgr/api",
+  "version": "1.0.0",
+  "description": "BADGR API serverless functions for Vercel",
+  "type": "module",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.38.0"
+  }
+} 

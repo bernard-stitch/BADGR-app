@@ -1,0 +1,11 @@
+# Task ID: 8
+# Title: Add BNPL Toggle Functionality
+# Status: done
+# Dependencies: 6
+# Priority: medium
+# Description: Implement a comprehensive BNPL configuration system that includes a master toggle for enabling/disabling all BNPL options and individual provider toggles for 5 major BNPL providers (Affirm, Klarna, Afterpay, Sezzle, Zip). The system should also track provider counts with visual badges, include an advanced settings section with options for showing provider logos, showing payment breakdowns, and applying settings to all products. Additionally, warning banners for configuration guidance and a responsive grid layout with colored provider badges should be implemented, along with comprehensive state management integration.
+# Details:
+Create the BNPLOptionsToggle.js component with full Polaris integration and accessibility compliance. Ensure that the component reflects the current state in the UI and provides granular control over BNPL provider configuration.
+
+# Test Strategy:
+Test the comprehensive BNPL configuration system to ensure that the master toggle and individual provider toggles correctly update the backend configuration and reflect changes in the UI. Verify that all advanced settings function as intended and that visual elements such as badges and banners are displayed correctly.

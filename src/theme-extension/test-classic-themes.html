@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classic Themes Compatibility Test - BADGR Widget</title>
+    
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f8f8f8;
+        }
+
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .test-info {
+            background: #e3f2fd;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            border-left: 4px solid #2196f3;
+        }
+
+        .theme-section {
+            background: white;
+            margin: 2rem 0;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .theme-header {
+            background: #333;
+            color: white;
+            padding: 1rem;
+            margin: -2rem -2rem 2rem -2rem;
+            border-radius: 8px 8px 0 0;
+        }
+
+        /* DEBUT THEME SIMULATION */
+        .debut-theme .product-single {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            max-width: 1000px;
+        }
+
+        .debut-theme .product-single__photos {
+            background: #f5f5f5;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+        }
+
+        .debut-theme .product-single__meta {
+            padding: 1rem;
+        }
+
+        .debut-theme .product-single__title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .debut-theme .product-single__price {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #333;
+            margin: 1rem 0;
+        }
+
+        .debut-theme .price-item {
+            margin-right: 0.5rem;
+        }
+
+        .debut-theme .price-item--sale {
+            color: #d32f2f;
+        }
+
+        .debut-theme .price-item--regular {
+            color: #999;
+            text-decoration: line-through;
+        }
+
+        .debut-theme .product-single__cart-submit {
+            background: #333;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            margin: 1rem 0;
+        }
+
+        .debut-theme .btn--add-to-cart {
+            background: #d32f2f;
+            color: white;
+        }
+
+        /* BROOKLYN THEME SIMULATION */
+        .brooklyn-theme .product {
+            display: flex;
+            max-width: 1000px;
+            gap: 2rem;
+        }
+
+        .brooklyn-theme .product__photo {
+            flex: 1;
+            background: #f5f5f5;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0;
+        }
+
+        .brooklyn-theme .product__details {
+            flex: 1;
+            padding: 0 1rem;
+        }
+
+        .brooklyn-theme .product__title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 400;
+            color: #333;
+        }
+
+        .brooklyn-theme .product-price {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 1.5rem 0;
+        }
+
+        .brooklyn-theme .money {
+            color: #333;
+        }
+
+        .brooklyn-theme .was_price {
+            color: #999;
+            text-decoration: line-through;
+            font-size: 1.2rem;
+            margin-left: 0.5rem;
+        }
+
+        .brooklyn-theme .btn-addtocart {
+            background: #000;
+            color: white;
+            padding: 1rem 1.5rem;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            margin: 1rem 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* MINIMAL THEME SIMULATION */
+        .minimal-theme .product-area {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            max-width: 900px;
+        }
+
+        .minimal-theme .product-image-main {
+            background: #fafafa;
+            height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #eee;
+        }
+
+        .minimal-theme .product-details {
+            padding: 0;
+        }
+
+        .minimal-theme .product-details h1 {
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+            font-weight: 300;
+            color: #222;
+        }
+
+        .minimal-theme .price {
+            font-size: 1.3rem;
+            font-weight: 400;
+            margin: 1rem 0;
+            color: #333;
+        }
+
+        .minimal-theme .current-price {
+            font-weight: 600;
+        }
+
+        .minimal-theme .original-price {
+            color: #999;
+            text-decoration: line-through;
+            margin-left: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .minimal-theme .add-to-cart {
+            background: #222;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            font-size: 0.9rem;
+            cursor: pointer;
+            width: 100%;
+            margin: 1.5rem 0;
+            font-weight: 400;
+        }
+
+        /* Test controls */
+        .test-controls {
+            background: #f5f5f5;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .test-controls button {
+            background: #2196f3;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.2rem;
+            margin: 0.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .test-controls button:hover {
+            background: #1976d2;
+        }
+
+        .test-results {
+            background: #f1f8e9;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #c8e6c9;
+        }
+
+        .test-highlight {
+            background: yellow !important;
+            padding: 0.3rem !important;
+            border: 2px solid red !important;
+            border-radius: 4px !important;
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .debut-theme .product-single,
+            .brooklyn-theme .product,
+            .minimal-theme .product-area {
+                grid-template-columns: 1fr;
+                flex-direction: column;
+            }
+
+            .theme-section {
+                padding: 1rem;
+            }
+
+            .theme-header {
+                margin: -1rem -1rem 1rem -1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <div class="test-info">
+            <h1>🧪 Classic Themes Compatibility Test</h1>
+            <p><strong>Testing:</strong> BADGR Widget compatibility with Debut, Brooklyn, and Minimal themes</p>
+            <p><strong>Focus:</strong> Theme-specific selectors + generic fallbacks</p>
+        </div>
+
+        <!-- DEBUT THEME TESTING -->
+        <div class="theme-section debut-theme">
+            <div class="theme-header">
+                <h2>🎨 Debut Theme (Legacy Classic)</h2>
+                <p>Testing Debut-specific selectors: .product-single__price, .product-single__cart-submit</p>
+            </div>
+
+            <div class="product-single">
+                <div class="product-single__photos">
+                    <p>[Product Photo - Debut Style]</p>
+                </div>
+                
+                <div class="product-single__meta">
+                    <h1 class="product-single__title">Debut Theme Test Product</h1>
+                    
+                    <div class="product-single__price">
+                        <span class="price-item price-item--sale">$89.99</span>
+                        <span class="price-item price-item--regular">$119.99</span>
+                    </div>
+
+                    <button class="btn product-single__cart-submit btn--add-to-cart" type="submit">
+                        Add to cart - Debut Style
+                    </button>
+
+                    <!-- BADGR Widget for Debut -->
+                    <div class="badgr-bnpl-widget" 
+                         data-product-id="debut-test-123"
+                         data-product-price="89.99"
+                         data-product-currency="USD"
+                         data-widget-id="debut-test"
+                         data-placement="below_price"
+                         data-show-logos="true">
+                        
+                        <div class="badgr-custom-text">Test: Debut Theme Integration</div>
+                        
+                        <div class="badgr-bnpl-options" data-enabled-providers="klarna,afterpay,affirm">
+                            <div class="badgr-loading">
+                                <span class="badgr-loading-text">Loading payment options...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BROOKLYN THEME TESTING -->
+        <div class="theme-section brooklyn-theme">
+            <div class="theme-header">
+                <h2>🏙️ Brooklyn Theme (Modern Classic)</h2>
+                <p>Testing generic selectors: .product-price, .money, .btn-addtocart</p>
+            </div>
+
+            <div class="product">
+                <div class="product__photo">
+                    <p>[Product Photo - Brooklyn Style]</p>
+                </div>
+                
+                <div class="product__details">
+                    <h1 class="product__title">Brooklyn Theme Test Product</h1>
+                    
+                    <div class="product-price">
+                        <span class="money">$129.99</span>
+                        <span class="was_price money">$159.99</span>
+                    </div>
+
+                    <button class="btn-addtocart" type="submit">
+                        Add to Cart - Brooklyn Style
+                    </button>
+
+                    <!-- BADGR Widget for Brooklyn -->
+                    <div class="badgr-bnpl-widget" 
+                         data-product-id="brooklyn-test-456"
+                         data-product-price="129.99"
+                         data-product-currency="USD"
+                         data-widget-id="brooklyn-test"
+                         data-placement="below_add_to_cart"
+                         data-show-logos="true">
+                        
+                        <div class="badgr-custom-text">Test: Brooklyn Theme Integration</div>
+                        
+                        <div class="badgr-bnpl-options" data-enabled-providers="klarna,sezzle,zip">
+                            <div class="badgr-loading">
+                                <span class="badgr-loading-text">Loading payment options...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MINIMAL THEME TESTING -->
+        <div class="theme-section minimal-theme">
+            <div class="theme-header">
+                <h2>✨ Minimal Theme (Simplified Classic)</h2>
+                <p>Testing generic selectors: .price, .current-price, .add-to-cart</p>
+            </div>
+
+            <div class="product-area">
+                <div class="product-image-main">
+                    <p>[Product Photo - Minimal Style]</p>
+                </div>
+                
+                <div class="product-details">
+                    <h1>Minimal Theme Test Product</h1>
+                    
+                    <div class="price">
+                        <span class="current-price">$79.99</span>
+                        <span class="original-price">$99.99</span>
+                    </div>
+
+                    <button class="add-to-cart" type="submit">
+                        Add to Cart
+                    </button>
+
+                    <!-- BADGR Widget for Minimal -->
+                    <div class="badgr-bnpl-widget" 
+                         data-product-id="minimal-test-789"
+                         data-product-price="79.99"
+                         data-product-currency="USD"
+                         data-widget-id="minimal-test"
+                         data-placement="above_price"
+                         data-show-logos="true">
+                        
+                        <div class="badgr-custom-text">Test: Minimal Theme Integration</div>
+                        
+                        <div class="badgr-bnpl-options" data-enabled-providers="afterpay,affirm,paypal_credit">
+                            <div class="badgr-loading">
+                                <span class="badgr-loading-text">Loading payment options...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TEST CONTROLS -->
+        <div class="test-controls">
+            <h3>🎛️ Classic Theme Test Controls</h3>
+            <div>
+                <strong>Debut Theme Tests:</strong>
+                <button onclick="testThemeSelectors('debut')">Test Debut Selectors</button>
+                <button onclick="testPlacement('debut', 'above_price')">Test Above Price</button>
+                <button onclick="testPlacement('debut', 'below_add_to_cart')">Test Below Button</button>
+            </div>
+            <div>
+                <strong>Brooklyn Theme Tests:</strong>
+                <button onclick="testThemeSelectors('brooklyn')">Test Brooklyn Selectors</button>
+                <button onclick="testPlacement('brooklyn', 'below_price')">Test Below Price</button>
+                <button onclick="testPlacement('brooklyn', 'custom')">Test Custom</button>
+            </div>
+            <div>
+                <strong>Minimal Theme Tests:</strong>
+                <button onclick="testThemeSelectors('minimal')">Test Minimal Selectors</button>
+                <button onclick="testPlacement('minimal', 'above_price')">Test Above Price</button>
+                <button onclick="testPlacement('minimal', 'below_price')">Test Below Price</button>
+            </div>
+            <div>
+                <strong>General Tests:</strong>
+                <button onclick="testAllThemes()">Test All Themes</button>
+                <button onclick="testResponsive()">Test Responsive</button>
+                <button onclick="clearHighlights()">Clear Highlights</button>
+            </div>
+        </div>
+
+        <div class="test-results" id="test-results">
+            <strong>Classic Themes Test Results:</strong><br>
+            Ready to begin testing classic themes...
+        </div>
+    </div>
+
+    <!-- Load BADGR widget assets -->
+    <link rel="stylesheet" href="assets/badgr-widget.css">
+    <script src="assets/badgr-widget.js"></script>
+
+    <script>
+        // Test utilities
+        function logResult(message) {
+            const results = document.getElementById('test-results');
+            results.innerHTML += '<br>' + new Date().toLocaleTimeString() + ': ' + message;
+        }
+
+        function clearHighlights() {
+            document.querySelectorAll('.test-highlight').forEach(el => {
+                el.classList.remove('test-highlight');
+            });
+            logResult('✅ Highlights cleared');
+        }
+
+        // Theme-specific selector testing
+        function testThemeSelectors(theme) {
+            clearHighlights();
+            logResult(`🔍 Testing ${theme.toUpperCase()} theme selectors...`);
+            
+            const themeSelectors = {
+                debut: {
+                    price: ['.product-single__price', '.price-item'],
+                    button: ['.product-single__cart-submit', '.btn--add-to-cart']
+                },
+                brooklyn: {
+                    price: ['.product-price', '.money'],
+                    button: ['.btn-addtocart']
+                },
+                minimal: {
+                    price: ['.price', '.current-price'],
+                    button: ['.add-to-cart']
+                }
+            };
+
+            const selectors = themeSelectors[theme];
+            if (!selectors) {
+                logResult(`❌ Unknown theme: ${theme}`);
+                return;
+            }
+
+            // Test price selectors
+            selectors.price.forEach(selector => {
+                const element = document.querySelector(`.${theme}-theme ${selector}`);
+                if (element) {
+                    element.classList.add('test-highlight');
+                    logResult(`✅ Found ${theme} price selector: ${selector}`);
+                } else {
+                    logResult(`❌ ${theme} price selector not found: ${selector}`);
+                }
+            });
+
+            // Test button selectors
+            selectors.button.forEach(selector => {
+                const element = document.querySelector(`.${theme}-theme ${selector}`);
+                if (element) {
+                    element.classList.add('test-highlight');
+                    logResult(`✅ Found ${theme} button selector: ${selector}`);
+                } else {
+                    logResult(`❌ ${theme} button selector not found: ${selector}`);
+                }
+            });
+        }
+
+        function testPlacement(theme, placement) {
+            clearHighlights();
+            logResult(`🎯 Testing ${theme} theme - ${placement} placement`);
+            
+            const widget = document.querySelector(`.${theme}-theme .badgr-bnpl-widget`);
+            if (!widget) {
+                logResult(`❌ Widget not found for ${theme} theme`);
+                return;
+            }
+
+            widget.dataset.placement = placement;
+            
+            // Find target elements for placement
+            const targets = {
+                debut: {
+                    price: '.product-single__price',
+                    button: '.product-single__cart-submit'
+                },
+                brooklyn: {
+                    price: '.product-price',
+                    button: '.btn-addtocart'
+                },
+                minimal: {
+                    price: '.price',
+                    button: '.add-to-cart'
+                }
+            };
+
+            const themeTargets = targets[theme];
+            if (!themeTargets) return;
+
+            if (placement.includes('price')) {
+                const priceEl = document.querySelector(`.${theme}-theme ${themeTargets.price}`);
+                if (priceEl) {
+                    priceEl.classList.add('test-highlight');
+                    logResult(`✅ Target found for ${placement}: ${themeTargets.price}`);
+                }
+            } else if (placement.includes('cart') || placement.includes('button')) {
+                const btnEl = document.querySelector(`.${theme}-theme ${themeTargets.button}`);
+                if (btnEl) {
+                    btnEl.classList.add('test-highlight');
+                    logResult(`✅ Target found for ${placement}: ${themeTargets.button}`);
+                }
+            }
+
+            // Update CSS class
+            widget.className = widget.className.replace(/badgr-placement-\w+/g, '');
+            widget.classList.add(`badgr-placement-${placement}`);
+            logResult(`✅ Applied CSS class: badgr-placement-${placement}`);
+        }
+
+        function testAllThemes() {
+            logResult('🚀 Testing all classic themes...');
+            
+            const themes = ['debut', 'brooklyn', 'minimal'];
+            themes.forEach(theme => {
+                logResult(`--- Testing ${theme.toUpperCase()} theme ---`);
+                testThemeSelectors(theme);
+            });
+            
+            logResult('✅ All themes tested');
+        }
+
+        function testResponsive() {
+            logResult('📱 Testing responsive behavior on classic themes...');
+            
+            const viewport = window.innerWidth;
+            const isMobile = viewport <= 768;
+            
+            logResult(`✅ Current viewport: ${viewport}px (${isMobile ? 'Mobile' : 'Desktop'})`);
+            
+            // Test each theme's responsive behavior
+            ['debut', 'brooklyn', 'minimal'].forEach(theme => {
+                const widget = document.querySelector(`.${theme}-theme .badgr-bnpl-widget`);
+                if (widget) {
+                    const styles = window.getComputedStyle(widget);
+                    logResult(`✅ ${theme} widget margin: ${styles.margin}`);
+                }
+            });
+        }
+
+        // Initialize when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            logResult('🚀 Classic themes test page loaded');
+            logResult('🎯 Testing Debut, Brooklyn, and Minimal themes');
+            
+            // Check widget presence
+            const widgets = document.querySelectorAll('.badgr-bnpl-widget');
+            logResult(`✅ Found ${widgets.length} widget instances`);
+            
+            widgets.forEach((widget, index) => {
+                const theme = widget.closest('[class*="-theme"]').className.split('-')[0];
+                logResult(`📊 ${theme} widget config: ${JSON.stringify({
+                    productId: widget.dataset.productId,
+                    price: widget.dataset.productPrice,
+                    placement: widget.dataset.placement
+                })}`);
+            });
+            
+            logResult('✨ Ready for classic theme testing! Use buttons above to test.');
+        });
+    </script>
+</body>
+</html> 
