@@ -6,7 +6,6 @@ import {
   Thumbnail,
   Banner,
   LegacyStack,
-  Caption,
   ButtonGroup,
   Button,
   Badge,
@@ -107,9 +106,9 @@ function PredefinedLogoSelector({ value, onChange, label = "Select Provider Logo
             <Text variant="headingMd" as="h3">
               {label}
             </Text>
-            <Caption>
+            <Text variant="bodySm" as="p" color="subdued">
               Choose from our library of BNPL provider logos
-            </Caption>
+            </Text>
           </div>
 
           {/* Filter Controls */}
@@ -150,7 +149,7 @@ function PredefinedLogoSelector({ value, onChange, label = "Select Provider Logo
                       <Text variant="bodySm" as="p" fontWeight="semibold">
                         {selectedLogo.name}
                       </Text>
-                      <Caption>{selectedLogo.description}</Caption>
+                      <Text variant="bodySm" as="p" color="subdued">{selectedLogo.description}</Text>
                     </div>
                   </div>
                   <Button size="slim" onClick={handleClearSelection}>
@@ -216,8 +215,8 @@ function PredefinedLogoSelector({ value, onChange, label = "Select Provider Logo
                             <Badge status="success">Recommended</Badge>
                           )}
                         </div>
-                        <Caption>{logo.category}</Caption>
-                        <Caption>{logo.description}</Caption>
+                        <Text variant="bodySm" as="p" color="subdued">{logo.category}</Text>
+                        <Text variant="bodySm" as="p" color="subdued">{logo.description}</Text>
                       </div>
                       
                       {selectedLogo?.id === logo.id && (
@@ -243,10 +242,10 @@ function PredefinedLogoSelector({ value, onChange, label = "Select Provider Logo
           <Divider />
 
           <div>
-            <Caption>
+            <Text variant="bodySm" as="p" color="subdued">
               All logos are optimized for web display and BNPL widget integration. 
               Need a custom logo? Contact support for assistance.
-            </Caption>
+            </Text>
           </div>
         </LegacyStack>
       </div>
