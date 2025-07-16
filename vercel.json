@@ -1,10 +1,9 @@
 {
   "version": 2,
   "name": "badgr",
-  "buildCommand": "cd src/frontend && npm install && npm run build",
+  "buildCommand": "npm run build:frontend",
   "outputDirectory": "src/frontend/dist",
   "installCommand": "npm install",
-  "devCommand": "cd src/frontend && npm run dev",
   "framework": "vite",
   "functions": {
     "api/**.js": {
