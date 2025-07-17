@@ -3,7 +3,7 @@ import {
   Card,
   Text,
   RadioButton,
-  LegacyStack,
+  BlockStack,
   Badge,
   Banner,
   Button,
@@ -12,7 +12,7 @@ import {
   Modal,
   TextContainer,
 } from '@shopify/polaris';
-import { ViewIcon, InfoIcon } from '@shopify/polaris-icons';
+import { ViewMajor, CircleInformationMajor } from '@shopify/polaris-icons';
 
 function PlacementSelector({ 
   value = 'product_page_bottom', 
@@ -253,13 +253,13 @@ function PlacementSelector({
   return (
     <Card>
       <div style={{ padding: '20px' }}>
-        <LegacyStack vertical spacing="loose">
+                  <BlockStack spacing="loose">
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <Text variant="headingMd" as="h3">
               {label}
             </Text>
             <Tooltip content="Choose where your BADGR widget appears on product pages for optimal visibility and conversion">
-              <Icon source={InfoIcon} color="subdued" />
+              <Icon source={CircleInformationMajor} color="subdued" />
             </Tooltip>
           </div>
           
@@ -276,7 +276,7 @@ function PlacementSelector({
                 backgroundColor: selectedPlacement === key ? '#f6f6f7' : 'white',
                 cursor: disabled ? 'not-allowed' : 'pointer'
               }}>
-                <LegacyStack vertical spacing="tight">
+                                  <BlockStack spacing="tight">
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <RadioButton
                       label={option.name}
@@ -302,17 +302,17 @@ function PlacementSelector({
                   <Button
                     size="slim"
                     plain
-                    icon={ViewIcon}
+                    icon={ViewMajor}
                     onClick={() => handlePreview(key)}
                     disabled={disabled}
                   >
                     Preview placement
                   </Button>
-                </LegacyStack>
+                </BlockStack>
               </div>
             ))}
           </div>
-        </LegacyStack>
+        </BlockStack>
       </div>
       
       <Modal

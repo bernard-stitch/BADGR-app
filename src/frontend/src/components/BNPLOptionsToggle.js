@@ -3,14 +3,14 @@ import {
   Card,
   Text,
   Checkbox,
-  LegacyStack,
+  BlockStack,
   Badge,
   Banner,
   Button,
   Icon,
   Tooltip,
 } from '@shopify/polaris';
-import { InfoIcon } from '@shopify/polaris-icons';
+import { CircleInformationMajor } from '@shopify/polaris-icons';
 
 function BNPLOptionsToggle({ 
   value = {}, 
@@ -96,13 +96,13 @@ function BNPLOptionsToggle({
   return (
     <Card>
       <div style={{ padding: '20px' }}>
-        <LegacyStack vertical spacing="loose">
+                  <BlockStack spacing="loose">
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <Text variant="headingMd" as="h3">
               {label}
             </Text>
             <Tooltip content="Display Buy Now Pay Later options in your widget to increase conversion rates">
-              <Icon source={InfoIcon} color="subdued" />
+              <Icon source={CircleInformationMajor} color="subdued" />
             </Tooltip>
           </div>
           
@@ -116,7 +116,7 @@ function BNPLOptionsToggle({
           
           {bnplOptions.enabled && (
             <div style={{ marginLeft: '24px' }}>
-              <LegacyStack vertical spacing="tight">
+              <BlockStack spacing="tight">
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <Text variant="headingSm" as="h4">
                     Payment Providers
@@ -177,7 +177,7 @@ function BNPLOptionsToggle({
                     borderRadius: '8px',
                     backgroundColor: '#fafbfb'
                   }}>
-                    <LegacyStack vertical spacing="tight">
+                    <BlockStack spacing="tight">
                       <Text variant="headingSm" as="h4">
                         Advanced BNPL Settings
                       </Text>
@@ -214,13 +214,13 @@ function BNPLOptionsToggle({
                         disabled={disabled}
                         helpText="Display BNPL options on all products, not just those above minimum amount"
                       />
-                    </LegacyStack>
+                    </BlockStack>
                   </div>
                 )}
-              </LegacyStack>
+              </BlockStack>
             </div>
           )}
-        </LegacyStack>
+        </BlockStack>
       </div>
     </Card>
   );

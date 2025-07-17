@@ -3,12 +3,10 @@ import {
   Card,
   Text,
   Button,
-  Stack,
+  BlockStack,
   Thumbnail,
   Banner,
   DropZone,
-  LegacyStack,
-  Caption,
 } from '@shopify/polaris';
 
 function LogoSelector({ value, onChange, label = "Widget Logo" }) {
@@ -64,7 +62,7 @@ function LogoSelector({ value, onChange, label = "Widget Logo" }) {
 
   const uploadedFile = files.length > 0 && (
     <div style={{ padding: '16px', textAlign: 'center' }}>
-      <LegacyStack vertical spacing="tight">
+      <BlockStack spacing="tight">
         <Thumbnail
           size="large"
           alt={files[0].name}
@@ -74,9 +72,9 @@ function LogoSelector({ value, onChange, label = "Widget Logo" }) {
           <Text variant="bodySm" as="p">
             {files[0].name}
           </Text>
-          <Caption>
+          <Text variant="bodySm" color="subdued">
             {(files[0].size / 1024).toFixed(1)} KB
-          </Caption>
+          </Text>
         </div>
         <Button
           size="slim"
@@ -84,13 +82,13 @@ function LogoSelector({ value, onChange, label = "Widget Logo" }) {
         >
           Remove
         </Button>
-      </LegacyStack>
+      </BlockStack>
     </div>
   );
 
   const existingPreview = !files.length && previewUrl && (
     <div style={{ padding: '16px', textAlign: 'center' }}>
-      <LegacyStack vertical spacing="tight">
+      <BlockStack spacing="tight">
         <Thumbnail
           size="large"
           alt="Current logo"
@@ -107,14 +105,14 @@ function LogoSelector({ value, onChange, label = "Widget Logo" }) {
         >
           Remove
         </Button>
-      </LegacyStack>
+      </BlockStack>
     </div>
   );
 
   return (
     <Card>
       <div style={{ padding: '20px' }}>
-        <LegacyStack vertical spacing="tight">
+        <BlockStack spacing="tight">
           <Text variant="headingMd" as="h3">
             {label}
           </Text>
@@ -137,11 +135,11 @@ function LogoSelector({ value, onChange, label = "Widget Logo" }) {
           </DropZone>
           
           <div style={{ marginTop: '8px' }}>
-            <Caption>
+            <Text variant="bodySm" color="subdued">
               Recommended size: 200x60px. Supports JPG, PNG, GIF, and SVG formats.
-            </Caption>
+            </Text>
           </div>
-        </LegacyStack>
+        </BlockStack>
       </div>
     </Card>
   );

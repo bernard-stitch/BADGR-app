@@ -14,7 +14,7 @@ import {
   Frame,
   Spinner,
   Badge,
-  LegacyStack,
+  BlockStack,
   Divider,
 } from '@shopify/polaris';
 import { useNavigate } from 'react-router-dom';
@@ -244,7 +244,7 @@ function WidgetSettings() {
           <Layout.Section>
             <Card>
               <div style={{ padding: '20px' }}>
-                <LegacyStack vertical spacing="loose">
+                <BlockStack spacing="loose">
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <Text variant="headingMd" as="h2">
                       Basic Settings
@@ -277,7 +277,7 @@ function WidgetSettings() {
                       helpText="Turn your widget on or off"
                     />
                   </FormLayout>
-                </LegacyStack>
+                </BlockStack>
               </div>
             </Card>
           </Layout.Section>
@@ -313,7 +313,7 @@ function WidgetSettings() {
           <Layout.Section>
             <Card>
               <div style={{ padding: '20px' }}>
-                <LegacyStack vertical spacing="loose">
+                <BlockStack spacing="loose">
                   <Text variant="headingMd" as="h2">
                     Advanced Settings
                   </Text>
@@ -350,7 +350,7 @@ function WidgetSettings() {
                       </Badge>
                     </div>
                   </div>
-                </LegacyStack>
+                </BlockStack>
               </div>
             </Card>
           </Layout.Section>

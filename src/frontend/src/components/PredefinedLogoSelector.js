@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import {
   Card,
   Text,
-  Stack,
+  BlockStack,
   Thumbnail,
   Banner,
-  LegacyStack,
   ButtonGroup,
   Button,
   Badge,
@@ -101,7 +100,7 @@ function PredefinedLogoSelector({ value, onChange, label = "Select Provider Logo
   return (
     <Card>
       <div style={{ padding: '20px' }}>
-        <LegacyStack vertical spacing="loose">
+                  <BlockStack spacing="loose">
           <div>
             <Text variant="headingMd" as="h3">
               {label}
@@ -138,7 +137,7 @@ function PredefinedLogoSelector({ value, onChange, label = "Select Provider Logo
           {selectedLogo && (
             <div>
               <Banner status="success" title="Logo Selected">
-                <LegacyStack vertical spacing="tight">
+                                  <BlockStack spacing="tight">
                   <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                     <Thumbnail
                       size="small"
@@ -155,7 +154,7 @@ function PredefinedLogoSelector({ value, onChange, label = "Select Provider Logo
                   <Button size="slim" onClick={handleClearSelection}>
                     Clear Selection
                   </Button>
-                </LegacyStack>
+                </BlockStack>
               </Banner>
             </div>
           )}
@@ -188,7 +187,7 @@ function PredefinedLogoSelector({ value, onChange, label = "Select Provider Logo
                     }}
                     onClick={() => handleLogoSelect(logo)}
                   >
-                    <LegacyStack vertical spacing="tight" alignment="center">
+                                          <BlockStack spacing="tight" align="center">
                       <div style={{ 
                         width: '120px', 
                         height: '40px', 
@@ -224,7 +223,7 @@ function PredefinedLogoSelector({ value, onChange, label = "Select Provider Logo
                           <Badge status="info">Selected</Badge>
                         </div>
                       )}
-                    </LegacyStack>
+                    </BlockStack>
                   </div>
                 </Card>
               ))}
@@ -247,7 +246,7 @@ function PredefinedLogoSelector({ value, onChange, label = "Select Provider Logo
               Need a custom logo? Contact support for assistance.
             </Text>
           </div>
-        </LegacyStack>
+        </BlockStack>
       </div>
     </Card>
   );
