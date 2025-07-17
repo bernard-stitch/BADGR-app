@@ -1,10 +1,10 @@
 {
   "version": 2,
   "name": "badgr",
-  "buildCommand": "npm run build --workspace=@badgr/frontend",
-  "outputDirectory": "src/frontend/dist",
-  "installCommand": "npm install",
   "framework": "vite",
+  "buildCommand": "npm run build --workspace=@badgr/frontend",
+  "outputDirectory": "dist",
+  "installCommand": "npm install",
   "functions": {
     "api/**.js": {
       "runtime": "nodejs18.x"
