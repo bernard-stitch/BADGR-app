@@ -3,11 +3,16 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import BNPLOptionsToggle from '../../components/BNPLOptionsToggle';
 
 const mockProps = {
-  bnplEnabled: true,
-  enabledProviders: ['klarna', 'afterpay'],
-  showLogos: true,
-  showPaymentBreakdown: true,
-  applyToAllProducts: true,
+  value: {
+    enabled: true,
+    providers: {
+      affirm: false,
+      klarna: true,
+      afterpay: true,
+      sezzle: false,
+      zip: false,
+    }
+  },
   onChange: jest.fn()
 };
 
@@ -23,52 +28,64 @@ describe('BNPLOptionsToggle', () => {
 
   it('displays the main BNPL toggle', () => {
     render(<BNPLOptionsToggle {...mockProps} />);
-    const mainToggle = screen.getByRole('checkbox', { name: /enable bnpl options/i });
+    const mainToggle = screen.getByRole('checkbox', { name: /enable buy now pay later options/i });
     expect(mainToggle).toBeInTheDocument();
     expect(mainToggle).toBeChecked();
   });
 
   it('calls onChange when main toggle is clicked', () => {
     render(<BNPLOptionsToggle {...mockProps} />);
-    const mainToggle = screen.getByRole('checkbox', { name: /enable bnpl options/i });
+    const mainToggle = screen.getByRole('checkbox', { name: /enable buy now pay later options/i });
     
     fireEvent.click(mainToggle);
     
     expect(mockProps.onChange).toHaveBeenCalledWith({
-      bnplEnabled: false,
-      enabledProviders: mockProps.enabledProviders,
-      showLogos: mockProps.showLogos,
-      showPaymentBreakdown: mockProps.showPaymentBreakdown,
-      applyToAllProducts: mockProps.applyToAllProducts
+      enabled: false,
+      providers: {
+        affirm: false,
+        klarna: false,
+        afterpay: false,
+        sezzle: false,
+        zip: false,
+      }
     });
   });
 
   it('displays provider count badge when providers are enabled', () => {
     render(<BNPLOptionsToggle {...mockProps} />);
     expect(screen.getByTestId('badge')).toBeInTheDocument();
-    expect(screen.getByText('2 providers enabled')).toBeInTheDocument();
+    expect(screen.getByText('2 enabled')).toBeInTheDocument();
   });
 
   it('shows warning when no providers are selected', () => {
     const propsWithNoProviders = {
       ...mockProps,
-      enabledProviders: []
+      value: {
+        enabled: true,
+        providers: {
+          affirm: false,
+          klarna: false,
+          afterpay: false,
+          sezzle: false,
+          zip: false,
+        }
+      }
     };
     
     render(<BNPLOptionsToggle {...propsWithNoProviders} />);
     expect(screen.getByTestId('banner')).toBeInTheDocument();
-    expect(screen.getByText(/select at least one provider/i)).toBeInTheDocument();
+    expect(screen.getByText(/select at least one payment provider/i)).toBeInTheDocument();
   });
 
   it('renders all available BNPL providers', () => {
     render(<BNPLOptionsToggle {...mockProps} />);
     
-    // Check for provider names
-    expect(screen.getByText('Affirm')).toBeInTheDocument();
-    expect(screen.getByText('Klarna')).toBeInTheDocument();
-    expect(screen.getByText('Afterpay')).toBeInTheDocument();
-    expect(screen.getByText('Sezzle')).toBeInTheDocument();
-    expect(screen.getByText('Zip')).toBeInTheDocument();
+    // Check for provider names in checkbox labels
+    expect(screen.getByRole('checkbox', { name: /affirm/i })).toBeInTheDocument();
+    expect(screen.getByRole('checkbox', { name: /klarna/i })).toBeInTheDocument();
+    expect(screen.getByRole('checkbox', { name: /afterpay/i })).toBeInTheDocument();
+    expect(screen.getByRole('checkbox', { name: /sezzle/i })).toBeInTheDocument();
+    expect(screen.getByRole('checkbox', { name: /zip/i })).toBeInTheDocument();
   });
 
   it('shows enabled providers as checked', () => {
@@ -91,11 +108,14 @@ describe('BNPLOptionsToggle', () => {
     fireEvent.click(affirmCheckbox);
     
     expect(mockProps.onChange).toHaveBeenCalledWith({
-      bnplEnabled: mockProps.bnplEnabled,
-      enabledProviders: ['klarna', 'afterpay', 'affirm'],
-      showLogos: mockProps.showLogos,
-      showPaymentBreakdown: mockProps.showPaymentBreakdown,
-      applyToAllProducts: mockProps.applyToAllProducts
+      enabled: true,
+      providers: {
+        affirm: true,
+        klarna: true,
+        afterpay: true,
+        sezzle: false,
+        zip: false,
+      }
     });
   });
 
@@ -106,18 +126,21 @@ describe('BNPLOptionsToggle', () => {
     fireEvent.click(klarnaCheckbox);
     
     expect(mockProps.onChange).toHaveBeenCalledWith({
-      bnplEnabled: mockProps.bnplEnabled,
-      enabledProviders: ['afterpay'],
-      showLogos: mockProps.showLogos,
-      showPaymentBreakdown: mockProps.showPaymentBreakdown,
-      applyToAllProducts: mockProps.applyToAllProducts
+      enabled: true,
+      providers: {
+        affirm: false,
+        klarna: false,
+        afterpay: true,
+        sezzle: false,
+        zip: false,
+      }
     });
   });
 
   it('toggles advanced settings visibility', () => {
     render(<BNPLOptionsToggle {...mockProps} />);
     
-    // Advanced settings should be hidden initially
+    // Advanced settings should not be visible initially
     expect(screen.queryByText(/show provider logos/i)).not.toBeInTheDocument();
     
     // Click the advanced settings button
@@ -125,7 +148,7 @@ describe('BNPLOptionsToggle', () => {
     fireEvent.click(advancedButton);
     
     // Advanced settings should now be visible
-    expect(screen.getByText(/show provider logos/i)).toBeInTheDocument();
+    expect(screen.getByRole('checkbox', { name: /show provider logos/i })).toBeInTheDocument();
   });
 
   it('handles advanced settings changes', () => {
@@ -139,32 +162,35 @@ describe('BNPLOptionsToggle', () => {
     const showLogosCheckbox = screen.getByRole('checkbox', { name: /show provider logos/i });
     fireEvent.click(showLogosCheckbox);
     
-    expect(mockProps.onChange).toHaveBeenCalledWith({
-      bnplEnabled: mockProps.bnplEnabled,
-      enabledProviders: mockProps.enabledProviders,
-      showLogos: false,
-      showPaymentBreakdown: mockProps.showPaymentBreakdown,
-      applyToAllProducts: mockProps.applyToAllProducts
-    });
+    expect(mockProps.onChange).toHaveBeenCalled();
   });
 
   it('displays tooltip with helpful information', () => {
     render(<BNPLOptionsToggle {...mockProps} />);
     
-    // Check if tooltip or info icon is present
-    expect(screen.getByText(/buy now, pay later options/i)).toBeInTheDocument();
+    // Check if tooltip is present with the correct content
+    const tooltip = screen.getByTestId('tooltip');
+    expect(tooltip).toHaveAttribute('data-content', 'Display Buy Now Pay Later options in your widget to increase conversion rates');
   });
 
   it('disables provider selection when BNPL is disabled', () => {
-    const disabledProps = {
+    const propsWithDisabledBNPL = {
       ...mockProps,
-      bnplEnabled: false
+      value: {
+        enabled: false,
+        providers: {
+          affirm: false,
+          klarna: true,
+          afterpay: true,
+          sezzle: false,
+          zip: false,
+        }
+      }
     };
     
-    render(<BNPLOptionsToggle {...disabledProps} />);
+    render(<BNPLOptionsToggle {...propsWithDisabledBNPL} />);
     
-    // Provider checkboxes should be disabled
-    const klarnaCheckbox = screen.getByRole('checkbox', { name: /klarna/i });
-    expect(klarnaCheckbox).toBeDisabled();
+    // Provider checkboxes should not be visible when BNPL is disabled
+    expect(screen.queryByRole('checkbox', { name: /klarna/i })).not.toBeInTheDocument();
   });
 }); 

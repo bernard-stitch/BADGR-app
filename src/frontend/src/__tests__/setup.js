@@ -21,11 +21,23 @@ jest.mock('@shopify/polaris', () => {
       )
     }
   );
+
+  // Create Layout component with Section subcomponent
+  const Layout = Object.assign(
+    ({ children }) => React.createElement('div', { 'data-testid': 'layout' }, children),
+    {
+      Section: ({ children }) => React.createElement(
+        'div',
+        { 'data-testid': 'layout-section' },
+        children
+      )
+    }
+  );
   
   return {
     AppProvider: ({ children }) => children,
     Page: ({ children, title }) => React.createElement('div', { 'data-testid': 'page', title }, children),
-    Layout: ({ children }) => React.createElement('div', { 'data-testid': 'layout' }, children),
+    Layout,
     Card: ({ children, title }) => React.createElement('div', { 'data-testid': 'card', title }, children),
     Text: ({ children, variant, as }) => React.createElement(as || 'span', { 'data-testid': 'text', 'data-variant': variant }, children),
     Button: ({ children, onClick, primary, disabled }) => React.createElement(
@@ -57,16 +69,40 @@ jest.mock('@shopify/polaris', () => {
         option.label
       ))
     ),
-    Checkbox: ({ label, checked, onChange }) => React.createElement(
-      'input',
-      {
-        'data-testid': 'checkbox',
-        type: 'checkbox',
-        'aria-label': label,
-        checked,
-        onChange: (e) => onChange?.(e.target.checked)
+    Checkbox: ({ label, checked, onChange }) => {
+      // Extract text content from complex labels
+      let labelText = '';
+      if (typeof label === 'string') {
+        labelText = label;
+      } else if (React.isValidElement(label)) {
+        // For complex JSX labels, try to extract text content
+        const extractText = (element) => {
+          if (typeof element === 'string') return element;
+          if (typeof element === 'number') return element.toString();
+          if (React.isValidElement(element)) {
+            if (element.props.children) {
+              if (Array.isArray(element.props.children)) {
+                return element.props.children.map(extractText).join(' ');
+              }
+              return extractText(element.props.children);
+            }
+          }
+          return '';
+        };
+        labelText = extractText(label);
       }
-    ),
+      
+      return React.createElement(
+        'input',
+        {
+          'data-testid': 'checkbox',
+          type: 'checkbox',
+          'aria-label': labelText,
+          checked,
+          onChange: (e) => onChange?.(e.target.checked)
+        }
+      );
+    },
     RadioButton: ({ label, checked, onChange, id }) => React.createElement(
       'input',
       {
@@ -147,14 +183,34 @@ jest.mock('@shopify/polaris', () => {
         ))
       )
     ),
-    // Missing components that were causing errors
-    LegacyStack: ({ children, vertical, spacing, alignment }) => React.createElement(
+    // New Polaris v12 Components
+    BlockStack: ({ children, spacing, align }) => React.createElement(
+      'div',
+      { 
+        'data-testid': 'block-stack',
+        'data-spacing': spacing,
+        'data-align': align
+      },
+      children
+    ),
+    InlineStack: ({ children, spacing, align }) => React.createElement(
+      'div',
+      { 
+        'data-testid': 'inline-stack',
+        'data-spacing': spacing,
+        'data-align': align
+      },
+      children
+    ),
+    // Legacy components for backwards compatibility
+    LegacyStack: ({ children, vertical, spacing, alignment, distribution }) => React.createElement(
       'div',
       { 
         'data-testid': 'legacy-stack',
         'data-vertical': vertical,
         'data-spacing': spacing,
-        'data-alignment': alignment
+        'data-alignment': alignment,
+        'data-distribution': distribution
       },
       children
     ),
@@ -212,17 +268,6 @@ jest.mock('@shopify/polaris', () => {
       },
       children
     ),
-    LegacyStack: ({ children, vertical, spacing, alignment, distribution }) => React.createElement(
-      'div',
-      { 
-        'data-testid': 'legacy-stack',
-        'data-vertical': vertical,
-        'data-spacing': spacing,
-        'data-alignment': alignment,
-        'data-distribution': distribution
-      },
-      children
-    ),
     Spinner: ({ size, color }) => React.createElement(
       'div',
       { 
@@ -235,9 +280,11 @@ jest.mock('@shopify/polaris', () => {
   };
 });
 
-// Mock Shopify Polaris Icons
+// Mock Shopify Polaris Icons - Updated for v12
 jest.mock('@shopify/polaris-icons', () => ({
-  InfoIcon: 'info-icon'
+  InfoIcon: 'info-icon', // Legacy support
+  CircleInformationMajor: 'circle-information-major',
+  ViewMajor: 'view-major'
 }));
 
 // Mock Shopify App Bridge
