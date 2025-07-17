@@ -1,7 +1,7 @@
 {
   "version": 2,
   "name": "badgr",
-  "buildCommand": "npm run build --workspace=@badgr/frontend",
+  "buildCommand": "cd src/frontend && npm run build",
   "outputDirectory": "src/frontend/dist",
   "installCommand": "npm install",
   "framework": "vite",
